@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../features/cartSlice';
+import { addItem } from '../../features/cartSlice';
 import { useEffect } from 'react';
-import { fetchCards } from '../features/cardSlice';
-import { SelectAllCard } from '../features/cardSlice';
-import { SelectAllCart } from '../features/cartSlice';
+import { fetchCards } from '../../features/cardSlice';
+import { SelectAllCard } from '../../features/cardSlice';
+import { SelectAllCart } from '../../features/cartSlice';
 
 export const Card = () => {
   const dispatch = useDispatch();

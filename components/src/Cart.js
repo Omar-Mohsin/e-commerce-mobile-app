@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../../features/cartSlice';
 import { SelectAllCart } from '../../features/cartSlice';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 export const Cart = () => {
 
@@ -43,45 +44,58 @@ export const Cart = () => {
     const taxRate = 0.05; 
     const subtotal = calculateTotalPrice();
     const tax = subtotal * taxRate;
-    return tax.toFixed(2);
+    return tax
   };
 
   const calculateGrandTotal = () => {
     const subtotal = Math.round(calculateTotalPrice());
     const tax = parseFloat(calculateTax());
     const grandTotal = subtotal + tax;
-    return grandTotal.toFixed(2);
+    return grandTotal;
   };
-
   return (
     <View style={styles.container}>
       <ScrollView>
-        {filteredCarts.map((card) => (
+        
        
-
-          <View key={card.id} style={styles.cardContainer}>
-            <Image source={{ uri: card.image }} style={styles.cardImage} />
+          <SwipeListView
+          data={filteredCarts}
+          renderItem = {(card)=>(
+  
+            <View key={card.item.id} style={styles.cardContainer}>
+            <Image source={{ uri: card.item.image }} style={styles.cardImage} />
             <View style={styles.cardDetails}>
-              <Text style={styles.cardTitle}>{card.title}</Text>
-              <Text style={styles.cardDescription}>{card.description}</Text>
+              <Text style={styles.cardTitle}>{card.item.title}</Text>
+              <Text style={styles.cardDescription}>{card.item.description}</Text>
               <View style={styles.quantityContainer}>
-                <TouchableOpacity onPress={() => minOnClick(card)}>
+                <TouchableOpacity onPress={() => minOnClick(card.item)}>
                   <Text style={styles.quantityButton}>-</Text>
                 </TouchableOpacity>
-                <Text style={styles.quantity}>{carts.filter((item) => item.id === card.id).length}</Text>
-                <TouchableOpacity onPress={() => plusOnClick(card)}>
+                <Text style={styles.quantity}>{carts.filter((item) => item.id === card.item.id).length}</Text>
+                <TouchableOpacity onPress={() => plusOnClick(card.item)}>
                   <Text style={styles.quantityButton}>+</Text>
                 </TouchableOpacity>
               </View>
-              <Text style={styles.cardPrice}>Price: ${card.price}</Text>
-              <Text style={styles.totalPrice}>Total: ${totalPrice(card)}</Text>
-              <Pressable style={styles.Button} onPress={() => onRemoveClick(card)}>
-              <Text style={styles.text}>Remove</Text>
-              </Pressable>
-              
+              <Text style={styles.cardPrice}>Price: ${card.item.price}</Text>
+              <Text style={styles.totalPrice}>Total: ${totalPrice(card.item)}</Text>
+             
             </View>
           </View>
-        ))}
+          ) 
+          }
+          renderHiddenItem={(data, rowMap) => (
+            <View style={styles.rowBack}>
+            <Pressable style={styles.removeButton}
+              onPress={() => onRemoveClick(data.item)}
+            >
+              <Text style={styles.removeButtonText}>Remove</Text>
+            </Pressable>
+          </View>
+          )}
+        rightOpenValue={-100}
+          />
+          
+    
       </ScrollView>
       <View style={styles.summaryContainer}>
         <Text style={styles.summaryText}>Subtotal: ${calculateTotalPrice()}</Text>
@@ -114,6 +128,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
     marginTop : 10,
+  
     
   },
   cardDetails: {
@@ -163,23 +178,26 @@ const styles = StyleSheet.create({
 
     fontWeight: 'bold',
   },
-  Button: {
-   marginBottom :  5,
-   backgroundColor: '#BB2525',
-   height : 40,
-   flex :1 ,
-   justifyContent : 'center',
-    borderRadius : 20,
-    alignItems : 'center',
-  },
 
-  text: {
+  removeButton: {
+    alignSelf: 'flex-end',
+    borderRadius: 15,
+    backgroundColor: 'red',
+    height: '98%', 
+    width: 100, 
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center', 
+    zIndex: 1, 
+  },
+  removeButtonText: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'white',
   },
+  
  
   summaryContainer: {
     marginTop: 20,
