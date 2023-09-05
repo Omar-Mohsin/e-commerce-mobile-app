@@ -38,6 +38,11 @@ export const Card = () => {
                 source={{ uri: item.image }}
                 style={styles.cardImage}
               />
+                 {cart.filter((card) => item.id === card.id).length > 0 && (
+            <View style = {styles.CartItemCount}>
+             <Text style = {styles.CartItemCountText}> {cart.filter((card) => item.id === card.id).length}</Text>
+            </View>
+          )}
               <View style={styles.cardInfo}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
                 <Text style={styles.cardPrice}>${item.price}</Text>
@@ -47,6 +52,7 @@ export const Card = () => {
                     addOnCart(item);
                   }}
                 >
+       
                   <Text style={styles.addToCartButtonText}>ADD TO CART</Text>
                 </TouchableOpacity>
               </View>
@@ -106,6 +112,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  CartItemCount : {
+    fontSize: 1.2,
+    textAlign: 'center',
+    alignItems :'center',
+  
+    padding:10,
+    backgroundColor: '#64ccc5',
+    color: 'white',
+    position: 'absolute' ,
+    top: 4,
+    right: 7,
+    borderRadius: 50,
+  },
+  CartItemCountText :{
+    color : 'white',
+    fontSize : 15,
+  }
 });
+
 
 export default Card;
