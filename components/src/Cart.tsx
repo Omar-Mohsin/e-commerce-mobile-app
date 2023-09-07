@@ -8,7 +8,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 export const Cart = ()  :JSX.Element => {
 
 
-  interface CardItem  {
+  interface Product  {
 
     id  :  number , 
     title  : string , 
@@ -19,32 +19,32 @@ export const Cart = ()  :JSX.Element => {
 
  
   const carts = useSelector(SelectAllCart);
-  const filteredCarts =  carts.filter((item : CardItem, index :  number) => carts.indexOf(item) === index);
+  const filteredCarts =  carts.filter((item : Product, index :  number) => carts.indexOf(item) === index);
 
   const dispatch = useDispatch();
 
-  const onRemoveClick = (card : CardItem) => {
+  const onRemoveClick = (card : Product) => {
     dispatch(removeItem(card.id));
   };
 
-  const minOnClick = (card : CardItem) => {
+  const minOnClick = (card : Product) => {
     dispatch(removeItem(card.id));
   };
 
-  const plusOnClick = (card : CardItem) => {
+  const plusOnClick = (card : Product) => {
     dispatch(addItem(card));
   };
 
-  const totalPrice= (card : CardItem)=>{
-    const newArray = carts.filter((item : CardItem) => item.id === card.id);
+  const totalPrice= (card : Product)=>{
+    const newArray = carts.filter((item : Product) => item.id === card.id);
     const ArrayLength = newArray.length;
     const totalPrice  =ArrayLength*card.price;
     return totalPrice;
   }
 
   const calculateTotalPrice = () : number => {
-    const subPrice = Math.round(carts.reduce((acc : number, card : CardItem) => {
-      const cardCount = carts.filter((item : CardItem) => item.id === card.id).length;
+    const subPrice = Math.round(carts.reduce((acc : number, card : Product) => {
+      const cardCount = carts.filter((item : Product) => item.id === card.id).length;
       return acc + card.price * cardCount;
     }, 0));
     return subPrice;
@@ -70,7 +70,7 @@ export const Cart = ()  :JSX.Element => {
        
           <SwipeListView
           data={filteredCarts}
-          renderItem={({ item: card }: { item: CardItem }) =>(
+          renderItem={({ item: card }: { item: Product }) =>(
   
             <View key={card.id} style={styles.cardContainer}>
       <Image source={{ uri: card.image }} style={styles.cardImage} />
@@ -81,7 +81,7 @@ export const Cart = ()  :JSX.Element => {
                 <TouchableOpacity onPress={() => minOnClick(card)}>
                   <Text style={styles.quantityButton}>-</Text>
                 </TouchableOpacity>
-                <Text style={styles.quantity}>{carts.filter((item : CardItem) => item.id === card.id).length}</Text>
+                <Text style={styles.quantity}>{carts.filter((item : Product) => item.id === card.id).length}</Text>
                 <TouchableOpacity onPress={() => plusOnClick(card)}>
                   <Text style={styles.quantityButton}>+</Text>
                 </TouchableOpacity>

@@ -19,7 +19,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 export const Card = ():JSX.Element=> {
 
 
-    interface  CardItem {
+    interface  Product {
       id : number , 
       title : string , 
       price  : number , 
@@ -31,7 +31,7 @@ export const Card = ():JSX.Element=> {
     const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
 
-  const addOnCart = (card : CardItem) => {
+  const addOnCart = (card : Product) => {
     dispatch(addItem(card));
   };
 
@@ -50,9 +50,9 @@ export const Card = ():JSX.Element=> {
                 source={{ uri: item.image }}
                 style={styles.cardImage}
               />
-                 {cart.filter((card : CardItem) => item.id === card.id).length > 0 && (
+                 {cart.filter((card : Product) => item.id === card.id).length > 0 && (
             <View style = {styles.CartItemCount}>
-             <Text style = {styles.CartItemCountText}> {cart.filter((card : CardItem) => item.id === card.id).length}</Text>
+             <Text style = {styles.CartItemCountText}> {cart.filter((card : Product) => item.id === card.id).length}</Text>
             </View>
           )}
               <View style={styles.cardInfo}>
