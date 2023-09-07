@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 
   const Tab =createStackNavigator();
-export const Home = () => {
+export const Home  = () :JSX.Element  => {
 
 
   

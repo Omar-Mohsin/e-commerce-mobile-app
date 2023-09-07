@@ -5,51 +5,61 @@ import { addItem, removeItem } from '../../features/cartSlice';
 import { SelectAllCart } from '../../features/cartSlice';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-export const Cart = () => {
+export const Cart = ()  :JSX.Element => {
+
+
+  interface CardItem  {
+
+    id  :  number , 
+    title  : string , 
+    description : string , 
+    price : number,
+    image : string, 
+  }
 
  
   const carts = useSelector(SelectAllCart);
-  const filteredCarts =  carts.filter((item, index) => carts.indexOf(item) === index);
+  const filteredCarts =  carts.filter((item : CardItem, index :  number) => carts.indexOf(item) === index);
 
   const dispatch = useDispatch();
 
-  const onRemoveClick = (card) => {
+  const onRemoveClick = (card : CardItem) => {
     dispatch(removeItem(card.id));
   };
 
-  const minOnClick = (card) => {
+  const minOnClick = (card : CardItem) => {
     dispatch(removeItem(card.id));
   };
 
-  const plusOnClick = (card) => {
+  const plusOnClick = (card : CardItem) => {
     dispatch(addItem(card));
   };
 
-  const totalPrice= (card)=>{
-    const newArray = carts.filter((item) => item.id === card.id);
+  const totalPrice= (card : CardItem)=>{
+    const newArray = carts.filter((item : CardItem) => item.id === card.id);
     const ArrayLength = newArray.length;
     const totalPrice  =ArrayLength*card.price;
     return totalPrice;
   }
 
-  const calculateTotalPrice = () => {
-    const totalPrice = Math.round(carts.reduce((acc, card) => {
-      const cardCount = carts.filter((item) => item.id === card.id).length;
+  const calculateTotalPrice = () : number => {
+    const subPrice = Math.round(carts.reduce((acc : number, card : CardItem) => {
+      const cardCount = carts.filter((item : CardItem) => item.id === card.id).length;
       return acc + card.price * cardCount;
     }, 0));
-    return totalPrice;
+    return subPrice;
   };
 
-  const calculateTax = () => {
-    const taxRate = 0.05; 
-    const subtotal = calculateTotalPrice();
-    const tax = subtotal * taxRate;
+  const calculateTax = () : number => {
+    const taxRate : number = 0.05; 
+    const subtotal : number = calculateTotalPrice();
+    const tax : number = subtotal * taxRate;
     return tax
   };
 
   const calculateGrandTotal = () => {
-    const subtotal = Math.round(calculateTotalPrice());
-    const tax = parseFloat(calculateTax());
+    const subtotal : number = Math.round(calculateTotalPrice());
+    const tax : number =calculateTax();
     const grandTotal = subtotal + tax;
     return grandTotal;
   };
@@ -60,31 +70,31 @@ export const Cart = () => {
        
           <SwipeListView
           data={filteredCarts}
-          renderItem = {(card)=>(
+          renderItem={({ item: card }: { item: CardItem }) =>(
   
-            <View key={card.item.id} style={styles.cardContainer}>
-            <Image source={{ uri: card.item.image }} style={styles.cardImage} />
+            <View key={card.id} style={styles.cardContainer}>
+      <Image source={{ uri: card.image }} style={styles.cardImage} />
             <View style={styles.cardDetails}>
-              <Text style={styles.cardTitle}>{card.item.title}</Text>
-              <Text style={styles.cardDescription}>{card.item.description}</Text>
+              <Text style={styles.cardTitle}>{card.title}</Text>
+              <Text style={styles.cardDescription}>{card.description}</Text>
               <View style={styles.quantityContainer}>
-                <TouchableOpacity onPress={() => minOnClick(card.item)}>
+                <TouchableOpacity onPress={() => minOnClick(card)}>
                   <Text style={styles.quantityButton}>-</Text>
                 </TouchableOpacity>
-                <Text style={styles.quantity}>{carts.filter((item) => item.id === card.item.id).length}</Text>
-                <TouchableOpacity onPress={() => plusOnClick(card.item)}>
+                <Text style={styles.quantity}>{carts.filter((item : CardItem) => item.id === card.id).length}</Text>
+                <TouchableOpacity onPress={() => plusOnClick(card)}>
                   <Text style={styles.quantityButton}>+</Text>
                 </TouchableOpacity>
               </View>
-              <Text style={styles.cardPrice}>Price: ${card.item.price}</Text>
-              <Text style={styles.totalPrice}>Total: ${totalPrice(card.item)}</Text>
+              <Text style={styles.cardPrice}>Price: ${card.price}</Text>
+              <Text style={styles.totalPrice}>Total: ${totalPrice(card)}</Text>
              
             </View>
           </View>
           ) 
           }
           renderHiddenItem={(data, rowMap) => (
-            <View style={styles.rowBack}>
+            <View>
             <Pressable style={styles.removeButton}
               onPress={() => onRemoveClick(data.item)}
             >
@@ -176,7 +186,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color : '#FF5722',
 
-    fontWeight: 'bold',
   },
 
   removeButton: {

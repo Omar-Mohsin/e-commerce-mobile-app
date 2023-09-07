@@ -13,13 +13,25 @@ import { useEffect } from 'react';
 import { fetchCards } from '../../features/cardSlice';
 import { SelectAllCard } from '../../features/cardSlice';
 import { SelectAllCart } from '../../features/cartSlice';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { AnyAction } from '@reduxjs/toolkit';
 
-export const Card = () => {
-  const dispatch = useDispatch();
-  const cards = useSelector(SelectAllCard);
+export const Card = ():JSX.Element=> {
+
+
+    interface  CardItem {
+      id : number , 
+      title : string , 
+      price  : number , 
+      image : string , 
+
+    }
+
+    const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch(); // Correct type for dispatch
+    const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
 
-  const addOnCart = (card) => {
+  const addOnCart = (card : CardItem) => {
     dispatch(addItem(card));
   };
 
@@ -38,9 +50,9 @@ export const Card = () => {
                 source={{ uri: item.image }}
                 style={styles.cardImage}
               />
-                 {cart.filter((card) => item.id === card.id).length > 0 && (
+                 {cart.filter((card : CardItem) => item.id === card.id).length > 0 && (
             <View style = {styles.CartItemCount}>
-             <Text style = {styles.CartItemCountText}> {cart.filter((card) => item.id === card.id).length}</Text>
+             <Text style = {styles.CartItemCountText}> {cart.filter((card : CardItem) => item.id === card.id).length}</Text>
             </View>
           )}
               <View style={styles.cardInfo}>
