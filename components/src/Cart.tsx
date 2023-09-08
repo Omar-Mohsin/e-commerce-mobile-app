@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cardImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
+    objectFit: 'contain',
+    width: 130,
+    height: 170,
     marginTop : 10,
   
     
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     paddingHorizontal: 10,
+    color : 'black',
   },
   quantity: {
     fontSize: 18,

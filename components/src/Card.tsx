@@ -91,10 +91,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 5,
   },
-  cardImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 20,
+  
+  cardImage: { 
+    objectFit: 'contain',
+    width: 130,
+    height: 170,
   },
   cardInfo: {
     flex: 1,
@@ -123,6 +124,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
+    textAlign : 'center'
+
   },
   CartItemCount : {
     fontSize: 1.2,
