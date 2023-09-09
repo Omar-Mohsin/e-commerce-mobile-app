@@ -36,32 +36,35 @@ export const Cart = ()  :JSX.Element => {
   };
 
   const totalPrice= (card : Product)=>{
-    const newArray = carts.filter((item : Product) => item.id === card.id);
+    const newArray = carts.filter((item:Product) => item.id === card.id);
     const ArrayLength = newArray.length;
-    const totalPrice  =ArrayLength*card.price;
+    const totalPrice  = ArrayLength*card.price;
     return totalPrice;
   }
+  const subtotal = (filteredCarts.reduce((acc :number, product :Product) => {
+    return acc + totalPrice(product);
+  }, 0)) .toFixed(2);
 
   const calculateTotalPrice = () : number => {
-    const subPrice = Math.round(carts.reduce((acc : number, card : Product) => {
+    const subPrice = (carts.reduce((acc : number, card : Product) => {
       const cardCount = carts.filter((item : Product) => item.id === card.id).length;
       return acc + card.price * cardCount;
-    }, 0));
+    }, 0)).toFixed(2);;
     return subPrice;
   };
 
   const calculateTax = () : number => {
     const taxRate : number = 0.05; 
     const subtotal : number = calculateTotalPrice();
-    const tax : number = subtotal * taxRate;
+    const tax : number = (subtotal * taxRate);
     return tax
   };
 
   const calculateGrandTotal = () => {
     const subtotal : number = Math.round(calculateTotalPrice());
-    const tax : number =calculateTax();
+    const tax : number =calculateTax() ;
     const grandTotal = subtotal + tax;
-    return grandTotal;
+    return grandTotal .toFixed(2);;
   };
   return (
     <View style={styles.container}>
@@ -71,9 +74,8 @@ export const Cart = ()  :JSX.Element => {
           <SwipeListView
           data={filteredCarts}
           renderItem={({ item: card }: { item: Product }) =>(
-  
             <View key={card.id} style={styles.cardContainer}>
-      <Image source={{ uri: card.image }} style={styles.cardImage} />
+            <Image source={{ uri: card.image }} style={styles.cardImage} />
             <View style={styles.cardDetails}>
               <Text style={styles.cardTitle}>{card.title}</Text>
               <Text style={styles.cardDescription}>{card.description}</Text>
@@ -92,6 +94,8 @@ export const Cart = ()  :JSX.Element => {
             </View>
           </View>
           ) 
+          
+          
           }
           renderHiddenItem={(data, rowMap) => (
             <View>
@@ -107,12 +111,14 @@ export const Cart = ()  :JSX.Element => {
           
     
       </ScrollView>
+      {filteredCarts.length > 0 && ( // Check if there are items in the cart
       <View style={styles.summaryContainer}>
-        <Text style={styles.summaryText}>Subtotal: ${calculateTotalPrice()}</Text>
-        <Text style={styles.summaryText}>Tax (5%): ${calculateTax()}</Text>
+        <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
+        <Text style={styles.summaryText}>Tax (5%): ${calculateTax().toFixed(2)}</Text>
         <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
       </View>
-    </View>
+    )}
+  </View>
     
   );
 };
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderRadius: 15,
+    borderRadius: 10,
     padding: 10,
     marginBottom: 10,
   },
@@ -191,9 +197,9 @@ const styles = StyleSheet.create({
 
   removeButton: {
     alignSelf: 'flex-end',
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor: 'red',
-    height: '98%', 
+    height: '98.2%', 
     width: 100, 
     right: 0,
     alignItems: 'center',
@@ -228,5 +234,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color : 'green'
   },
+  emptyCartText :  {
+  fontSize: 20,
+  fontWeight: 'bold',
+  textAlign: 'center',
+  marginTop: 20,
+  color: 'red',
+  }
 });
 
