@@ -67,59 +67,54 @@ export const Cart = ()  :JSX.Element => {
     return grandTotal .toFixed(2);;
   };
   return (
-    <View style={styles.container}>
+<View style={styles.container}>
       <ScrollView>
-        
-       
+        {filteredCarts.length > 0 ? (
           <SwipeListView
-          data={filteredCarts}
-          renderItem={({ item: card }: { item: Product }) =>(
-            <View key={card.id} style={styles.cardContainer}>
-            <Image source={{ uri: card.image }} style={styles.cardImage} />
-            <View style={styles.cardDetails}>
-              <Text style={styles.cardTitle}>{card.title}</Text>
-              <Text style={styles.cardDescription}>{card.description}</Text>
-              <View style={styles.quantityContainer}>
-                <TouchableOpacity onPress={() => minOnClick(card)}>
-                  <Text style={styles.quantityButton}>-</Text>
-                </TouchableOpacity>
-                <Text style={styles.quantity}>{carts.filter((item : Product) => item.id === card.id).length}</Text>
-                <TouchableOpacity onPress={() => plusOnClick(card)}>
-                  <Text style={styles.quantityButton}>+</Text>
-                </TouchableOpacity>
+            data={filteredCarts}
+            renderItem={({ item: card }: { item: Product }) => (
+              <View key={card.id} style={styles.cardContainer}>
+                <Image source={{ uri: card.image }} style={styles.cardImage} />
+                <View style={styles.cardDetails}>
+                  <Text style={styles.cardTitle}>{card.title}</Text>
+                  <Text style={styles.cardDescription}>{card.description}</Text>
+                  <View style={styles.quantityContainer}>
+                    <TouchableOpacity onPress={() => minOnClick(card)}>
+                      <Text style={styles.quantityButton}>-</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.quantity}>
+                      {carts.filter((item: Product) => item.id === card.id).length}
+                    </Text>
+                    <TouchableOpacity onPress={() => plusOnClick(card)}>
+                      <Text style={styles.quantityButton}>+</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.cardPrice}>Price: ${card.price}</Text>
+                  <Text style={styles.totalPrice}>Total: ${totalPrice(card)}</Text>
+                </View>
               </View>
-              <Text style={styles.cardPrice}>Price: ${card.price}</Text>
-              <Text style={styles.totalPrice}>Total: ${totalPrice(card)}</Text>
-             
-            </View>
-          </View>
-          ) 
-          
-          
-          }
-          renderHiddenItem={(data, rowMap) => (
-            <View>
-            <Pressable style={styles.removeButton}
-              onPress={() => onRemoveClick(data.item)}
-            >
-              <Text style={styles.removeButtonText}>Remove</Text>
-            </Pressable>
-          </View>
-          )}
-        rightOpenValue={-100}
+            )}
+            renderHiddenItem={(data, rowMap) => (
+              <View>
+                <Pressable style={styles.removeButton} onPress={() => onRemoveClick(data.item)}>
+                  <Text style={styles.removeButtonText}>Remove</Text>
+                </Pressable>
+              </View>
+            )}
+            rightOpenValue={-100}
           />
-          
-    
+        ) : (
+          <Text style={styles.emptyCartText}>Empty Cart</Text>
+        )}
       </ScrollView>
-      {filteredCarts.length > 0 && ( // Check if there are items in the cart
-      <View style={styles.summaryContainer}>
-        <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
-        <Text style={styles.summaryText}>Tax (5%): ${calculateTax().toFixed(2)}</Text>
-        <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
-      </View>
-    )}
-  </View>
-    
+      {filteredCarts.length > 0 && (
+        <View style={styles.summaryContainer}>
+          <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
+          <Text style={styles.summaryText}>Tax (5%): ${calculateTax()}</Text>
+          <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
+        </View>
+      )}
+    </View>
   );
 };
 
