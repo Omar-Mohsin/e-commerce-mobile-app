@@ -110,7 +110,7 @@ export const Cart = ()  :JSX.Element => {
       {filteredCarts.length > 0 && (
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
-          <Text style={styles.summaryText}>Tax (5%): ${calculateTax()}</Text>
+          <Text style={styles.summaryText}>Tax (5%): ${calculateTax().toFixed(2)}</Text>
           <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
         </View>
       )}
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius:15,
     padding: 10,
     marginBottom: 10,
   },
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
 
   removeButton: {
     alignSelf: 'flex-end',
-    borderRadius: 10,
+    borderRadius: 15,
     backgroundColor: 'red',
     height: '98.2%', 
     width: 100, 

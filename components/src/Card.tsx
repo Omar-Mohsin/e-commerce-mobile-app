@@ -56,7 +56,7 @@ export const Card = ():JSX.Element=> {
             </View>
           )}
               <View style={styles.cardInfo}>
-                <Text style={styles.cardTitle}>{item.title}</Text>
+                <Text style={styles.cardTitle} numberOfLines={2} ellipsizeMode='tail'>{item.title}</Text>
                 <Text style={styles.cardPrice}>${item.price}</Text>
                 <TouchableOpacity
                   style={styles.addToCartButton}
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#053B50',
+    
   },
   cardPrice: {
     fontSize: 24, 
@@ -128,21 +129,22 @@ const styles = StyleSheet.create({
 
   },
   CartItemCount : {
-    fontSize: 1.2,
-    textAlign: 'center',
-    alignItems :'center',
-  
-    padding:10,
+   marginTop : 5,
     backgroundColor: '#64ccc5',
-    color: 'white',
     position: 'absolute' ,
-    top: 4,
+    top: 6,
     right: 7,
-    borderRadius: 50,
+    width: 35, 
+    height: 35, 
+    borderRadius: 50, 
+
   },
   CartItemCountText :{
     color : 'white',
-    fontSize : 15,
+    fontSize: 20,
+  textAlign : 'center',
+  marginTop : 5,
+  marginRight : 5,
   }
 });
 
