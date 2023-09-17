@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "234997219663",
+    "project_id": "diamond-app-b1d02",
+    "storage_bucket": "diamond-app-b1d02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234997219663:android:3499a1e2270d238561053a",
+        "android_client_info": {
+          "package_name": "com.basic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234997219663-5p9reavf046gm3sgtcndpuc6var3dj53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj_0Sht8kh-LOfFIyQYDY7KNDTSFv-F9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234997219663-5p9reavf046gm3sgtcndpuc6var3dj53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

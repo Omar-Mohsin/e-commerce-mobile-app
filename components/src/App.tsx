@@ -1,19 +1,20 @@
 import { StyleSheet, Text, View , Button } from 'react-native';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { store } from '../../store/store';
 import { Home } from './Home';
 import { Cart } from './Cart';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
-import SignIn from '../SignIn';
+import SignIn from './SignIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { SelectUser } from '../../features/authSlice';
 export default function App(): JSX.Element {
   enableScreens(); 
 
   const Tab = createBottomTabNavigator();
-
   return (
     
     <Provider store={store}>
