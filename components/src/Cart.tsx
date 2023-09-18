@@ -41,9 +41,9 @@ export const Cart = ()  :JSX.Element => {
     const totalPrice  = ArrayLength*card.price;
     return totalPrice;
   }
-  const subtotal = (filteredCarts.reduce((acc :number, product :Product) => {
-    return acc + totalPrice(product);
-  }, 0)) .toFixed(2);
+  const subtotal = filteredCarts
+  .reduce((acc: number, product: Product) => acc + totalPrice(product), 0)
+  .toFixed(2);
 
   const calculateTotalPrice = () : number => {
     const subPrice = (carts.reduce((acc : number, card : Product) => {
@@ -56,16 +56,18 @@ export const Cart = ()  :JSX.Element => {
   const calculateTax = () : number => {
     const taxRate : number = 0.05; 
     const subtotal : number = calculateTotalPrice();
-    const tax : number = (subtotal * taxRate);
+    const tax : number = Math.round(subtotal * taxRate);
     return tax
   };
 
-  const calculateGrandTotal = () => {
-    const subtotal : number = Math.round(calculateTotalPrice());
-    const tax : number =calculateTax() ;
-    const grandTotal = subtotal + tax;
-    return grandTotal .toFixed(2);;
-  };
+
+    const calculateGrandTotal = (): number => {
+      const totalTax: number = calculateTax();
+      const totalSubtotal: number = calculateTotalPrice();
+      const grandTotal: number = totalSubtotal + totalTax;
+      return grandTotal;
+    };
+
   return (
 <View style={styles.container}>
       <ScrollView>
