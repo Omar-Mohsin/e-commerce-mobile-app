@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Pressable } from 'react-native';
 import { useDispatch , useSelector } from 'react-redux';
 import { login  , SelectUser ,logout } from '../../features/authSlice';
-
+import Profile from './Profile';
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +17,7 @@ export default function SignIn() {
     dispatch(login({email , password}))
     };
 
-    const handleSignOut = () => {
-      dispatch(logout(null))
-      };
+   
 
     return (
       
@@ -44,10 +42,7 @@ export default function SignIn() {
           </Pressable>
         </View>
       ) : (
-        <View>        
-        <Text>Welcome</Text>
-        <Button title = 'logout' onPress={handleSignOut}></Button>
-        </View>
+        <Profile user={user}></Profile>
 
       )}
     </>
@@ -86,7 +81,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop : 70,
     borderRadius: 15,
-    backgroundColor: 'cyan',
+    backgroundColor: '#34ba20',
     width : 150,
     height : 50,
     alignItems: 'center',
@@ -94,6 +89,6 @@ const styles = StyleSheet.create({
     color: 'black', 
   },
   signInText : {
-    color :  'black',
-  }
+    fontSize  : 20,
+    color : 'white'  }
 });

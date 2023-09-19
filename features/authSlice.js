@@ -5,25 +5,27 @@ const initialState = {
   users:
  [
     {    
-
+        name : 'Omar',
         email  : 'Omar@gmail.com', 
         password : '122333', 
         cart : [],
 
     } , 
     {
-        email : 'DemoO448@gmail.com', 
+        name : 'Ahmad',
+        email : 'Demo448@gmail.com', 
         password : '12341234',
         cart : [],
     },
     {
+        name : 'Sammer',
         email : 'MockDummy@gmail,com', 
         password : '111222333',
         cart : [],
     },
 ] , 
 
-        loggedInUser: null, // This will store the currently logged-in user
+        loggedInUser: null, 
 
 
 
@@ -47,7 +49,7 @@ reducers :{
       );
 
       if (user) {
-        state.loggedInUser = user; // Set the logged-in user
+        state.loggedInUser = user.name; 
       }  
     }},
     logout: {
