@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
  
   summaryContainer: {
     marginTop: 20,
+    marginLeft :10,
     borderTopWidth: 1,
     borderTopColor: '#ccc',
     paddingVertical: 10,
@@ -242,19 +243,20 @@ const styles = StyleSheet.create({
   color: 'red',
   },
   button: {
+    marginLeft : -2,
     marginTop : 20,
     borderRadius: 15,
-    backgroundColor: 'lime',
-    width : 130,
-    height : 45,
+    backgroundColor: '#34ba20',
+    width : 150,
+    height : 50,
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'black', 
+    color: 'black',  
   },
 
   CheckoutText : {
     fontSize :20,
-      color : 'black',
+      color : 'white',
   }
 });
 
