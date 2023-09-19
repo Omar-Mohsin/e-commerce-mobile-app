@@ -114,6 +114,9 @@ export const Cart = ()  :JSX.Element => {
           <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
           <Text style={styles.summaryText}>Tax (5%): ${calculateTax().toFixed(2)}</Text>
           <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
+          <Pressable style={styles.button} >
+            <Text style={styles.CheckoutText}>Checkout</Text>
+          </Pressable>
         </View>
       )}
     </View>
@@ -237,6 +240,21 @@ const styles = StyleSheet.create({
   textAlign: 'center',
   marginTop: 20,
   color: 'red',
+  },
+  button: {
+    marginTop : 20,
+    borderRadius: 15,
+    backgroundColor: 'lime',
+    width : 130,
+    height : 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'black', 
+  },
+
+  CheckoutText : {
+    fontSize :20,
+      color : 'black',
   }
 });
 

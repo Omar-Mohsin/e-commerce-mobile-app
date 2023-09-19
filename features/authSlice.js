@@ -6,7 +6,7 @@ const initialState = {
  [
     {    
 
-        email  : 'Omar@gmail.com ', 
+        email  : 'Omar@gmail.com', 
         password : '122333', 
         cart : [],
 
@@ -52,7 +52,7 @@ reducers :{
     }},
     logout: {
         reducer (state , action){
-            state.loggedInUser = null; 
+            state.loggedInUser = action.payload; 
 
         }},
 }, 
@@ -60,7 +60,7 @@ reducers :{
 
 
 export const SelectUser =(state)=>{
-    return state.auth.user;
+    return state.auth.loggedInUser;
 
 }
 export const authReducer = authSlice.reducer;

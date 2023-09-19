@@ -1,37 +1,59 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Pressable } from 'react-native';
+import { useDispatch , useSelector } from 'react-redux';
+import { login  , SelectUser ,logout } from '../../features/authSlice';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = () => {
-    // Implement your sign-in logic here
-  };
+  const dispatch = useDispatch();
+  const user = useSelector(SelectUser)
 
-  return (
-   
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Welcome Back!</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Email"
-          keyboardType="email-address"
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Password"
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-        />
-        <Pressable style={styles.button}>
-          <Text style = {styles.signInText}>Sign in</Text>
-          
-         </Pressable>      
-            
+
+  console.log(user)
+
+  const handleSignIn = () => {
+    dispatch(login({email , password}))
+    };
+
+    const handleSignOut = () => {
+      dispatch(logout(null))
+      };
+
+    return (
+      
+      <>
+      {!user ? (
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Welcome Back!</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Email"
+            keyboardType="email-address"
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Password"
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <Pressable style={styles.button} onPress={handleSignIn}>
+            <Text style={styles.signInText}>Sign in</Text>
+          </Pressable>
         </View>
-  );
+      ) : (
+        <View>        
+        <Text>Welcome</Text>
+        <Button title = 'logout' onPress={handleSignOut}></Button>
+        </View>
+
+      )}
+    </>
+
+    );
+    
 }
 
 const styles = StyleSheet.create({

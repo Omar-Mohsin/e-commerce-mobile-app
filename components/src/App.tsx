@@ -11,13 +11,18 @@ import { enableScreens } from 'react-native-screens';
 import SignIn from './SignIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
+
+
+
 export default function App(): JSX.Element {
+  const user  = useSelector(SelectUser)
+
   enableScreens(); 
 
   const Tab = createBottomTabNavigator();
+
   return (
     
-    <Provider store={store}>
 
 
  <NavigationContainer>
@@ -45,20 +50,39 @@ export default function App(): JSX.Element {
           }}
           />
 
-          <Tab.Screen
-            name="signIn"
-            component={SignIn}
-            options={{ title : 'sign-in',
-            tabBarLabel: 'sign-in',
-            tabBarIcon: ({ color, size }) => (
-              <Icon name="sign-in" color={color} size={size} />
-            ), 
-          }}
-          />
+
+{
+  !user ? (
+    <Tab.Screen
+      name="signIn"
+      component={SignIn}
+      options={{
+        title: 'Sign In',
+        tabBarLabel: 'Sign In',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="sign-in" color={color} size={size} />
+        ),
+      }}
+    />
+  ) : (
+    <Tab.Screen
+      name="Profile"
+      component={SignIn} 
+      options={{
+        title: 'Profile',
+        tabBarLabel: 'profile',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="user" color={color} size={size} />
+        ),
+      }}
+    />
+  )
+}
+
+        
 
         </Tab.Navigator>
       </NavigationContainer> 
-    </Provider>
   );
 }
 
