@@ -6,18 +6,40 @@ import { SelectUser } from '../../features/authSlice';
 const Orders = () => {
   const { cart } = useSelector(SelectUser);
 
+
+  const handlePrice = ()=>{
+
+
+  }
+
+  const handleDate = ()=>{
+
+    const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleString(); // Format the date and time
+
+  return formattedDate;
+  }
+
   const renderPackage = (packageItems, index) => (
+
+  
+
     <View key={index} style={styles.packageContainer}>
       <Text style={styles.packageTitle}>Order {index + 1}</Text>
-      {packageItems.map((item) => (
+      <Text style = {styles.DataText}>{handleDate()}</Text>
+      {packageItems.filter((item,  index) => packageItems.indexOf(item) === index).map((item) => (
         <View key={item.id} style={styles.orderItem}>
           <Image source={{ uri: item.image }} style={styles.image} />
           <View style={styles.productInfo}>
             <Text style={styles.title}>{item.title}</Text>
+            <Text style= {styles.quantityText}>quantity {packageItems.filter((product) => item.id === product.id).length}</Text>
             <Text style={styles.description}>{item.description}</Text>
+            <Text>---------------------------------------------</Text>
           </View>
+        
         </View>
       ))}
+        <Text style = {styles.PriceText}> Total Price  {packageItems.reduce((acc, item) => acc + item.price, 0)}</Text>
     </View>
   );
 
@@ -26,7 +48,11 @@ const Orders = () => {
       {cart.length > 0 ? (
         <>
           <Text style={styles.headerText}>Your Orders</Text>
-          {cart.map((packageItems, index) => renderPackage(packageItems, index))}
+          {cart.map((packageItems, index) => 
+         
+       
+          renderPackage(packageItems, index))
+          }
         </>
       ) : (
         <View style={styles.noOrdersContainer}>
@@ -74,7 +100,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
   },
   packageTitle: {
-    fontSize: 20,
+    fontSize: 24, // Increase font size for the package title
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#333',
@@ -85,8 +111,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100, // Increase image height for better visibility
+    width: 100, // Increase image width for better visibility
     borderRadius: 10,
     marginRight: 15,
   },
@@ -102,6 +128,19 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: '#555',
+  },
+  DataText: {
+    marginBottom: 10,
+    color: 'blue',
+  },
+  PriceText: {
+    fontSize: 22,
+    color: 'lime',
+    fontWeight: 'bold', // Make price text bold
+  },
+  quantityText: {
+    marginBottom: 10,
+    color: 'green',
   },
 });
 

@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View , Button } from 'react-native';
-
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Home } from './Home';
@@ -12,100 +11,80 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
 import Orders from './Orders';
 
-
-
 export default function App(): JSX.Element {
-  const user  = useSelector(SelectUser)
+  const user = useSelector(SelectUser);
 
-  enableScreens(); 
+  enableScreens();
 
   const Tab = createBottomTabNavigator();
 
   return (
-    
-
-
-
-
-  
-
-
-
-
- <NavigationContainer>
-        <Tab.Navigator>
-        
-          <Tab.Screen
-            name="Home"
-            component={Home}
-            options={{ title : 'Store',
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: 'Store',
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Icon name="home" color={color} size={size} />
             ),
-          
           }}
-          />
-          <Tab.Screen
-            name="Cart"
-            component={Cart}
-            options={{ title : 'cart',
-            tabBarLabel: 'shopping-cart',
+        />
+        <Tab.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            title: 'Cart',
+            tabBarLabel: 'Cart',
             tabBarIcon: ({ color, size }) => (
               <Icon name="shopping-cart" color={color} size={size} />
-            ), 
+            ),
           }}
+        />
+
+        {!user ? (
+          <Tab.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{
+              title: 'Sign In',
+              tabBarLabel: 'Sign In',
+              tabBarIcon: ({ color, size }) => (
+                <Icon name="sign-in" color={color} size={size} />
+              ),
+            }}
           />
-
-
-{
-  !user ? (
-    <Tab.Screen
-      name="signIn"
-      component={SignIn}
-      options={{
-        title: 'Sign In',
-        tabBarLabel: 'Sign In',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="sign-in" color={color} size={size} />
-        ),
-      }}
-    />
-  ) : (
-      <>
-    <Tab.Screen
-      name="orders"
-      component={Orders} 
-      options={{
-        title: 'Orders',
-        tabBarLabel: 'Order',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="truck" color={color} size={size} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Profile"
-      component={SignIn} 
-      options={{
-        title: 'Profile',
-        tabBarLabel: 'profile',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="user" color={color} size={size} />
-        ),
-      }}
-    />
-    </>
-  )
-}
-
-        
-
-        </Tab.Navigator>
-      </NavigationContainer> 
-      
+        ) : (
+          <>
+            <Tab.Screen
+              name="Orders"
+              component={Orders}
+              options={{
+                title: 'Orders',
+                tabBarLabel: 'Orders',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="truck" color={color} size={size} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Profile"
+              component={SignIn}
+              options={{
+                title: 'Profile',
+                tabBarLabel: 'Profile',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="user" color={color} size={size} />
+                ),
+              }}
+            />
+          </>
+        )}
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-  
 }
 
 const styles = StyleSheet.create({});
