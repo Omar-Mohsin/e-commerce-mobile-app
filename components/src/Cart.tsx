@@ -1,12 +1,19 @@
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity , Button , Pressable} from 'react-native';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../../features/cartSlice';
+import { addItem, removeItem , clearCart} from '../../features/cartSlice';
 import { SelectAllCart } from '../../features/cartSlice';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { addToCart } from '../../features/authSlice';
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 export const Cart = ()  :JSX.Element => {
 
+  const navigation = useNavigation(); // Add this line to access the navigation prop
+  const carts = useSelector(SelectAllCart);
 
   interface Product  {
 
@@ -18,10 +25,17 @@ export const Cart = ()  :JSX.Element => {
   }
 
  
-  const carts = useSelector(SelectAllCart);
   const filteredCarts =  carts.filter((item : Product, index :  number) => carts.indexOf(item) === index);
 
+
   const dispatch = useDispatch();
+
+  const CheckoutHandler =()=>{
+    
+  dispatch(addToCart(carts))
+  navigation.navigate('orders'); // Navigate to the "Orders" screen
+    dispatch(clearCart(carts));
+  }
 
   const onRemoveClick = (card : Product) => {
     dispatch(removeItem(card.id));
@@ -70,7 +84,7 @@ export const Cart = ()  :JSX.Element => {
 
   return (
 <View style={styles.container}>
-      <ScrollView>
+    
         {filteredCarts.length > 0 ? (
           <SwipeListView
             data={filteredCarts}
@@ -108,13 +122,13 @@ export const Cart = ()  :JSX.Element => {
         ) : (
           <Text style={styles.emptyCartText}>Empty Cart</Text>
         )}
-      </ScrollView>
+      
       {filteredCarts.length > 0 && (
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryText}>Subtotal: ${subtotal}</Text>
           <Text style={styles.summaryText}>Tax (5%): ${calculateTax().toFixed(2)}</Text>
           <Text style={styles.grandTotal}>Grand Total: ${calculateGrandTotal()}</Text>
-          <Pressable style={styles.button} >
+          <Pressable style={styles.button} onPress={CheckoutHandler} >
             <Text style={styles.CheckoutText}>Checkout</Text>
           </Pressable>
         </View>

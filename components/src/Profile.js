@@ -2,13 +2,30 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image  ,Pressable} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/authSlice';
+import { useNavigation } from '@react-navigation/native';
+ // Add this line to access the navigation prop
 
 const Profile = ({ user }) => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
     dispatch(logout(null));
   };
+
+const GoOrders = ()=>{
+  navigation.navigate('orders'); // Navigate to the "Orders" screen
+
+}
+const GoCart = ()=>{
+  navigation.navigate('Cart'); // Navigate to the "Orders" screen
+
+}
+const GoHome = ()=>{
+  navigation.navigate('Home'); // Navigate to the "Orders" screen
+
+}
+
 
   return (
     <View style={styles.container}>
@@ -19,16 +36,16 @@ const Profile = ({ user }) => {
           }}
           style={styles.profileImage}
         />
-        <Text style={styles.welcomeText}>Welcome, {user}</Text>
+        <Text style={styles.welcomeText}>Welcome, {user.name}</Text>
       </View>
       <View style={styles.buttonContainer}>
-      <Pressable style ={styles.button} >
+      <Pressable style ={styles.button} onPress={GoOrders} >
             <Text style ={styles.ButtonText}>Orders</Text>
           </Pressable>
-          <Pressable style ={styles.button}>
+          <Pressable style ={styles.button}  onPress={GoCart}>
             <Text style ={styles.ButtonText} >Cart</Text>
           </Pressable>
-          <Pressable style ={styles.button}>
+          <Pressable style ={styles.button}  onPress={GoHome}>
             <Text style ={styles.ButtonText}>Home</Text>
           </Pressable>
       </View>

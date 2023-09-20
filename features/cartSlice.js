@@ -25,12 +25,16 @@ const cartSlice = createSlice({
                 };
             
             }
-        }, 
+        }, clearCart :{
+            reducer (state, action){
+                state.cartItems.splice(0,state.cartItems.length);
+            }
+        }
        
     },
 })
 
-export const {addItem,removeItem, decrement, increment } = cartSlice.actions;
+export const {addItem,removeItem, clearCart} = cartSlice.actions;
 
 
 export const SelectAllCart =(state)=>{

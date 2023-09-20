@@ -7,20 +7,20 @@ const initialState = {
     {    
         name : 'Omar',
         email  : 'Omar@gmail.com', 
-        password : '122333', 
+        password : '12@33%3!', 
         cart : [],
 
     } , 
     {
         name : 'Ahmad',
         email : 'Demo448@gmail.com', 
-        password : '12341234',
+        password : '12@34%123!4',
         cart : [],
     },
     {
         name : 'Sammer',
         email : 'MockDummy@gmail,com', 
-        password : '111222333',
+        password : '11@122!23%33',
         cart : [],
     },
 ] , 
@@ -33,7 +33,16 @@ const initialState = {
 
 
     
+  const Hashing = (password)=>{
+   
+      let userPassword= password; 
+      userPassword = userPassword.replace('@', '');
+      userPassword = userPassword.replace('!', '');
+      userPassword = userPassword.replace('%', '');
 
+    
+    return userPassword
+  }
 
 export const authSlice = createSlice({
 name : "auth" , 
@@ -45,11 +54,11 @@ reducers :{
      
         const { email, password } = action.payload;
       const user = state.users.find(
-        (user) => user.email === email && user.password === password
+        (user) => user.email === email && Hashing(user.password) === password
       );
 
       if (user) {
-        state.loggedInUser = user.name; 
+        state.loggedInUser = user; 
       }  
     }},
     logout: {
@@ -57,6 +66,14 @@ reducers :{
             state.loggedInUser = action.payload; 
 
         }},
+
+        addToCart : {
+          reducer(state , action){
+            const item = action.payload;
+            
+            state.loggedInUser.cart.push(item)
+        }
+      },
 }, 
 })
 
@@ -67,4 +84,4 @@ export const SelectUser =(state)=>{
 }
 export const authReducer = authSlice.reducer;
 
-export const {login , logout } = authSlice.actions;
+export const {login , logout ,addToCart } = authSlice.actions;

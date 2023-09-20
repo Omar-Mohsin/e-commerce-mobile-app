@@ -7,7 +7,8 @@ import React from 'react'
 const AppWrapper = () => {
   return (
     <Provider store ={store}> 
-     <App></App>
+
+     <App/>
     </Provider>
  
   )

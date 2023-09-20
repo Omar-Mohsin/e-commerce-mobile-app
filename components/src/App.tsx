@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View , Button } from 'react-native';
+
 import React from 'react';
-import { Provider } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { store } from '../../store/store';
 import { Home } from './Home';
 import { Cart } from './Cart';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,6 +10,7 @@ import { enableScreens } from 'react-native-screens';
 import SignIn from './SignIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
+import Orders from './Orders';
 
 
 
@@ -23,6 +23,13 @@ export default function App(): JSX.Element {
 
   return (
     
+
+
+
+
+  
+
+
 
 
  <NavigationContainer>
@@ -65,6 +72,18 @@ export default function App(): JSX.Element {
       }}
     />
   ) : (
+      <>
+    <Tab.Screen
+      name="orders"
+      component={Orders} 
+      options={{
+        title: 'Orders',
+        tabBarLabel: 'Order',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="truck" color={color} size={size} />
+        ),
+      }}
+    />
     <Tab.Screen
       name="Profile"
       component={SignIn} 
@@ -76,6 +95,7 @@ export default function App(): JSX.Element {
         ),
       }}
     />
+    </>
   )
 }
 
@@ -83,7 +103,9 @@ export default function App(): JSX.Element {
 
         </Tab.Navigator>
       </NavigationContainer> 
+      
   );
+  
 }
 
 const styles = StyleSheet.create({});
