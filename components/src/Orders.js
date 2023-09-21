@@ -7,10 +7,6 @@ const Orders = () => {
   const { cart } = useSelector(SelectUser);
 
 
-  const handlePrice = ()=>{
-
-
-  }
 
   const handleDate = ()=>{
 
