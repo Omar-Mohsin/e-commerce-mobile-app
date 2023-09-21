@@ -10,9 +10,11 @@ import SignIn from './SignIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
 import Orders from './Orders';
-
+import { createStackNavigator } from '@react-navigation/stack';
+import Detile from './Detile';
 export default function App(): JSX.Element {
   const user = useSelector(SelectUser);
+  const Stack = createStackNavigator();
 
   enableScreens();
 
@@ -20,6 +22,7 @@ export default function App(): JSX.Element {
 
   return (
     <NavigationContainer>
+
       <Tab.Navigator>
         <Tab.Screen
           name="Home"

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import base64 from 'react-native-base64'
 
 const initialState = {
   users:
@@ -7,20 +7,20 @@ const initialState = {
     {    
         name : 'Omar',
         email  : 'Omar@gmail.com', 
-        password : '12@33%3!', 
+        password : "b21hcm9tYXI=", 
         cart : [],
 
     } , 
     {
         name : 'Ahmad',
         email : 'Demo448@gmail.com', 
-        password : '12@34%123!4',
+        password : "YWhtYWQxMjM=",
         cart : [],
     },
     {
-        name : 'Sammer',
+        name : 'Samer',
         email : 'MockDummy@gmail,com', 
-        password : '11@122!23%33',
+        password : "c2FtZXIxMjM=",
         cart : [],
     },
 ] , 
@@ -33,15 +33,14 @@ const initialState = {
 
 
     
-  const Hashing = (password)=>{
-   
-      let userPassword= password; 
-      userPassword = userPassword.replace('@', '');
-      userPassword = userPassword.replace('!', '');
-      userPassword = userPassword.replace('%', '');
+  const decode = (password)=>{
+    console.log('the pass : ', password);
 
+    const pass  =  base64.decode(password);
     
-    return userPassword
+    console.log(pass)
+    return pass
+  
   }
 
 export const authSlice = createSlice({
@@ -54,7 +53,7 @@ reducers :{
      
         const { email, password } = action.payload;
       const user = state.users.find(
-        (user) => user.email === email && Hashing(user.password) === password
+        (user) => user.email === email && decode(user.password) === password
       );
 
       if (user) {

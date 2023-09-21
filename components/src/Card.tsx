@@ -5,8 +5,12 @@ import {
   View,
   FlatList,
   Image,
+  Pressable,
   TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../features/cartSlice';
 import { useEffect } from 'react';
@@ -17,6 +21,7 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
 
 export const Card = ():JSX.Element=> {
+  const Stack = createStackNavigator();
 
 
     interface  Product {
@@ -31,6 +36,13 @@ export const Card = ():JSX.Element=> {
     const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
 
+
+    const onProductPress =()=>{
+
+    }
+
+
+
   const addOnCart = (card : Product) => {
     dispatch(addItem(card));
   };
@@ -40,11 +52,16 @@ export const Card = ():JSX.Element=> {
   }, [dispatch]);
 
   return (
+    
     <View style={styles.container}>
+
+    
       <FlatList
         data={cards}
         renderItem={({ item }) => {
           return (
+            <Pressable onPress={onProductPress}>
+
             <View style={styles.cardContainer}>
               <Image
                 source={{ uri: item.image }}
@@ -69,6 +86,8 @@ export const Card = ():JSX.Element=> {
                 </TouchableOpacity>
               </View>
             </View>
+            </Pressable>
+
           );
         }}
         keyExtractor={(item) => item.id.toString()}
