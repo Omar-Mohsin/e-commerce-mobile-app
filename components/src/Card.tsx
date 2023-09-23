@@ -8,7 +8,6 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,7 +20,6 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
 
 export const Card = ():JSX.Element=> {
-  const Stack = createStackNavigator();
 
 
     interface  Product {
@@ -62,7 +60,7 @@ export const Card = ():JSX.Element=> {
           return (
             <Pressable onPress={onProductPress}>
 
-            <View style={styles.cardContainer}>
+            <View  key = {item.id} style={styles.cardContainer}>
               <Image
                 source={{ uri: item.image }}
                 style={styles.cardImage}
@@ -108,7 +106,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    elevation: 5,
   },
   
   cardImage: { 

@@ -11,22 +11,21 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
 import Orders from './Orders';
 import { createStackNavigator } from '@react-navigation/stack';
-import Detile from './Detile';
-export default function App(): JSX.Element {
+import HomeStack from './HomeStack';
+export default function App() {
   const user = useSelector(SelectUser);
-  const Stack = createStackNavigator();
 
   enableScreens();
 
   const Tab = createBottomTabNavigator();
-
+ 
   return (
     <NavigationContainer>
 
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={HomeStack}
           options={{
             title: 'Store',
             tabBarLabel: 'Home',
