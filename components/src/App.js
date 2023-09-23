@@ -29,6 +29,8 @@ export default function App() {
           options={{
             title: 'Store',
             tabBarLabel: 'Home',
+         headerShown: false ,
+
             tabBarIcon: ({ color, size }) => (
               <Icon name="home" color={color} size={size} />
             ),

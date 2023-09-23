@@ -8,14 +8,15 @@ const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator >
       <Stack.Screen name="Home" component={Home}
       
       options={{ headerShown: false }}
 
       
       />
-      <Stack.Screen name="Detail" component={Detile} />
+      <Stack.Screen name="Detile" component={Detile}
+      />
     </Stack.Navigator>
   );
 };

@@ -18,6 +18,7 @@ import { SelectAllCard } from '../../features/cardSlice';
 import { SelectAllCart } from '../../features/cartSlice';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
+import { useNavigation } from '@react-navigation/native';
 
 export const Card = ():JSX.Element=> {
 
@@ -34,8 +35,10 @@ export const Card = ():JSX.Element=> {
     const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
 
+  const navigation = useNavigation(); 
 
     const onProductPress =()=>{
+  navigation.navigate('Detile'); // Navigate to the "Orders" screen
 
     }
 
