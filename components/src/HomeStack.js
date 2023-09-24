@@ -3,7 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Home } from './Home';
-import Detile from './Detile';
+import Detail from './Detail';
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
@@ -15,7 +15,7 @@ const HomeStack = () => {
 
       
       />
-      <Stack.Screen name="Detile" component={Detile}
+      <Stack.Screen name="Detile" component={Detail}
       />
     </Stack.Navigator>
   );

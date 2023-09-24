@@ -4,15 +4,14 @@ import {
   Text,
   View,
   FlatList,
-  Image,
+  Image, 
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../features/cartSlice';
 import { useEffect } from 'react';
-import { fetchCards } from '../../features/cardSlice';
-import { SelectAllCard } from '../../features/cardSlice';
+import { fetchProducts } from '../../features/productSlice';
+import { SelectAllProducts } from '../../features/productSlice';
 import { SelectAllCart } from '../../features/cartSlice';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
@@ -26,7 +25,7 @@ export const Grid = (): JSX.Element => {
   }
 
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch(); // Correct type for dispatch
-  const cards = useSelector(SelectAllCard);
+  const cards = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
 
   const addOnCart = (card: Product) => {
@@ -34,7 +33,7 @@ export const Grid = (): JSX.Element => {
   };
 
   useEffect(() => {
-    dispatch(fetchCards());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const renderGridItem = ({ item }: { item: Product }) => {
@@ -68,7 +67,6 @@ export const Grid = (): JSX.Element => {
       <FlatList
         data={cards}
         renderItem={renderGridItem}
-        keyExtractor={(item) => item.id.toString()}
         numColumns={2} // Set the number of columns for the grid
       />
     </View>

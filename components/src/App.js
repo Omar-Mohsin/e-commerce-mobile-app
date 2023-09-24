@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Home } from './Home';
 import { Cart } from './Cart';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,7 +9,6 @@ import SignIn from './SignIn';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
 import Orders from './Orders';
-import { createStackNavigator } from '@react-navigation/stack';
 import HomeStack from './HomeStack';
 export default function App() {
   const user = useSelector(SelectUser);
@@ -29,7 +27,7 @@ export default function App() {
           options={{
             title: 'Store',
             tabBarLabel: 'Home',
-         headerShown: false ,
+             headerShown: false ,
 
             tabBarIcon: ({ color, size }) => (
               <Icon name="home" color={color} size={size} />

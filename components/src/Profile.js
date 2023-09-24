@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, Image  ,Pressable} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/authSlice';
 import { useNavigation } from '@react-navigation/native';
- // Add this line to access the navigation prop
 
 const Profile = ({ user }) => {
   const navigation = useNavigation();

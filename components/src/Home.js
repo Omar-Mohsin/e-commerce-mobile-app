@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React from 'react';
-import { Card } from './Card';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Products } from './Products';
 import Grid from './Grid';
 import { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,6 +16,9 @@ export const Home = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleContainer}>
+          <View style={styles.titleIcon}>
+            <Icon name  = 'diamond'  size={20}></Icon>
+          </View>
           <Text style={styles.title}>Store</Text>
         </View>
         <View style={styles.iconContainer}>
@@ -29,7 +31,7 @@ export const Home = () => {
         </View>
       </View>
 
-      {toggle ? <Grid /> : <Card />}
+      {toggle ? <Grid /> : <Products />}
     </View>
   );
 };
@@ -49,8 +51,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   titleContainer: {
-    flex: 1,
+    flexDirection : 'row',
     marginLeft: 10,
+    alignItems: 'center', // Align items vertically
+
   },
   title: {
     color: 'black',
@@ -61,4 +65,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     padding: 5, 
   },
+  titleIcon : {
+    marginRight : 10
+,  }
 });
