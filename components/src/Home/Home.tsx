@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import React from 'react';
 import Grid from './Grid';
-import { useState } from 'react';
+import {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomePage from './HomePage';
 
-export const Home = () => {
+export const Home = (): JSX.Element => {
   const [toggle, isToggle] = useState(false);
 
   const buttonHandler = () => {
@@ -17,7 +17,7 @@ export const Home = () => {
       <View style={styles.header}>
         <View style={styles.titleContainer}>
           <View style={styles.titleIcon}>
-            <Icon name  = 'diamond'  size={20}></Icon>
+            <Icon name="diamond" size={20}></Icon>
           </View>
           <Text style={styles.title}>Store</Text>
         </View>
@@ -26,7 +26,7 @@ export const Home = () => {
             name={!toggle ? 'th-large' : 'th-list'}
             size={25}
             onPress={buttonHandler}
-            color="#333" 
+            color="#333"
           />
         </View>
       </View>
@@ -51,21 +51,20 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   titleContainer: {
-    flexDirection : 'row',
+    flexDirection: 'row',
     marginLeft: 10,
     alignItems: 'center', // Align items vertically
-
   },
   title: {
     color: 'black',
     fontSize: 20,
-    fontWeight : 'bold',
+    fontWeight: 'bold',
   },
   iconContainer: {
     marginRight: 5,
-    padding: 5, 
+    padding: 5,
   },
-  titleIcon : {
-    marginRight : 10
-,  }
+  titleIcon: {
+    marginRight: 10,
+  },
 });

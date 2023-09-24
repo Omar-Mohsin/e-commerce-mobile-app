@@ -1,20 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Image, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
-import { SelectUser } from '../../../features/authSlice';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  ScrollView,
+} from 'react-native';
+import {useSelector} from 'react-redux';
+import {SelectUser} from '../../../features/authSlice';
 import Order from './Order';
-const OrderList = () => {
-  const { cart } = useSelector(SelectUser);
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+}
 
-
- 
-
-  const renderPackage = (packageItems, index) => (
-
-    <Order packege={packageItems} index = {index}/>
-
-    
+const OrderList = (): JSX.Element => {
+  const {cart} = useSelector(SelectUser);
+  const renderPackage = (packageItems: Product, index: number) => (
+    <Order packege={packageItems} index={index} />
   );
 
   return (
@@ -22,11 +30,9 @@ const OrderList = () => {
       {cart.length > 0 ? (
         <>
           <Text style={styles.headerText}>Your Orders</Text>
-          {cart.map((packageItems, index) => 
-         
-       
-          renderPackage(packageItems, index))
-          }
+          {cart.map((packageItems: Product, index: number) =>
+            renderPackage(packageItems, index),
+          )}
         </>
       ) : (
         <View style={styles.noOrdersContainer}>
@@ -61,7 +67,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'gray',
   },
-
 });
 
 export default OrderList;

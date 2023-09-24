@@ -1,16 +1,23 @@
-import { StyleSheet, Text, View, TextInput, Pressable, KeyboardAvoidingView } from 'react-native';
-import React, { useState } from 'react';
-import { login } from '../../../features/authSlice';
-import { useDispatch } from 'react-redux';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+} from 'react-native';
+import React, {useState} from 'react';
+import {login} from '../../../features/authSlice';
+import {useDispatch} from 'react-redux';
 
-const SignInPage = () => {
+const SignInPage = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    dispatch(login({ email, password }));
+    dispatch(login({email, password}));
   };
 
   return (
@@ -21,13 +28,13 @@ const SignInPage = () => {
           style={styles.input}
           placeholder="Enter Email"
           keyboardType="email-address"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={text => setEmail(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Enter Password"
           secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
         <Pressable style={styles.button} onPress={handleSignIn}>
           <Text style={styles.signInText}>Sign in</Text>
@@ -41,22 +48,22 @@ export default SignInPage;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     padding: 20,
     borderRadius: 10,
-    justifyContent : 'center',
-    height : 100,
+    justifyContent: 'center',
+    height: 100,
     width: '100%',
     alignItems: 'center',
   },
   formContainer: {
-    flex:1,
+    flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     padding: 20,
     borderRadius: 10,
-    justifyContent : 'center',
-    height : 100,
+    justifyContent: 'center',
+    height: 100,
     width: '100%',
     alignItems: 'center',
   },
@@ -76,11 +83,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   button: {
-    marginTop : 70,
+    marginTop: 70,
     borderRadius: 15,
     backgroundColor: '#34ba20',
-    width : 150,
-    height : 50,
+    width: 150,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     color: 'black',

@@ -1,7 +1,14 @@
 import { StyleSheet, Text, View , Image } from 'react-native'
 import React from 'react'
 
-const Order = ({packege , index}) => {
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  description : string;
+}
+const Order = ({packege , index} : any) => {
   const handleDate = ()=>{
 
     const currentDate = new Date();
@@ -15,12 +22,12 @@ const Order = ({packege , index}) => {
     <View key={index} style={styles.packageContainer}>
       <Text style={styles.packageTitle}>Order {index + 1}</Text>
       <Text style = {styles.DateText}>{handleDate()}</Text>
-      {packege.filter((item,  index) => packege.indexOf(item) === index).map((item) => (
+      {packege.filter((item : Product,  index :number) => packege.indexOf(item) === index).map((item : Product) => (
         <View key={item.id} style={styles.orderItem}>
           <Image source={{ uri: item.image }} style={styles.image} />
           <View style={styles.productInfo}>
             <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">{item.title}</Text>
-            <Text style= {styles.quantityText}>quantity {packege.filter((product) => item.id === product.id).length}</Text>
+            <Text style= {styles.quantityText}>quantity {packege.filter((product : Product) => item.id === product.id).length}</Text>
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.price}>${item.price}</Text>
             <Text>---------------------------------------------</Text>
@@ -28,7 +35,7 @@ const Order = ({packege , index}) => {
         
         </View>
       ))}
-        <Text style = {styles.PriceText}> Total Price  {packege.reduce((acc, item) => acc + item.price, 0)}</Text>
+        <Text style = {styles.PriceText}> Total Price  {packege.reduce((acc :number, item : Product) => acc + item.price, 0)}</Text>
     </View>
   )
 }

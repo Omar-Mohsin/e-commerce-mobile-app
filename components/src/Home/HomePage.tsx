@@ -9,11 +9,9 @@ export const HomePage = (): JSX.Element => {
     image: string;
   }
 
-
-
   return (
     <View style={styles.container}>
-      <Product/>
+      <Product />
     </View>
   );
 };
@@ -23,6 +21,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#EEEEEE',
   },
- });
+});
 
 export default HomePage;

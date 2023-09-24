@@ -4,17 +4,17 @@ import {
   Text,
   View,
   FlatList,
-  Image, 
+  Image,
   TouchableOpacity,
   Pressable,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem,SelectAllCart } from '../../../features/cartSlice';
-import { useEffect } from 'react';
-import { fetchProducts } from '../../../features/productSlice';
-import { SelectAllProducts } from '../../../features/productSlice';
-import { ThunkDispatch } from '@reduxjs/toolkit';
-import { AnyAction } from '@reduxjs/toolkit';
+import {useDispatch, useSelector} from 'react-redux';
+import {addItem, SelectAllCart} from '../../../features/cartSlice';
+import {useEffect} from 'react';
+import {fetchProducts} from '../../../features/productSlice';
+import {SelectAllProducts} from '../../../features/productSlice';
+import {ThunkDispatch} from '@reduxjs/toolkit';
+import {AnyAction} from '@reduxjs/toolkit';
 import {useNavigation} from '@react-navigation/native';
 
 export const Grid = (): JSX.Element => {
@@ -30,25 +30,23 @@ export const Grid = (): JSX.Element => {
   const cart = useSelector(SelectAllCart);
   const navigation = useNavigation();
 
-  const addOnCart = (card: Product) => {
-    dispatch(addItem(card));
+  const addOnCart = (product: Product) => {
+    dispatch(addItem(product));
   };
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const renderGridItem = ({ item }: { item: Product }) => {
+  const renderGridItem = ({item}: {item: Product}) => {
     return (
       <Pressable
         style={styles.gridItem}
         onPress={() => {
-          navigation.navigate('Detail', { product: item });
-
-        }}
-      >
+          navigation.navigate('Detail', {product: item});
+        }}>
         <View style={styles.gridImageContainer}>
-          <Image source={{ uri: item.image }} style={styles.gridImage} />
+          <Image source={{uri: item.image}} style={styles.gridImage} />
           {cart.filter((c: Product) => item.id === c.id).length > 0 && (
             <View style={styles.gridItemCount}>
               <Text style={styles.gridItemCountText}>
@@ -61,8 +59,10 @@ export const Grid = (): JSX.Element => {
           {item.title}
         </Text>
         <Text style={styles.gridPrice}>${item.price}</Text>
-        <TouchableOpacity style ={styles.addToCartButton} onPress={()=>addOnCart(item)}>
-          <Text style ={styles.addToCartButtonText}>+</Text>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={() => addOnCart(item)}>
+          <Text style={styles.addToCartButtonText}>+</Text>
         </TouchableOpacity>
       </Pressable>
     );
@@ -70,11 +70,7 @@ export const Grid = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={products}
-        renderItem={renderGridItem}
-        numColumns={2} 
-      />
+      <FlatList data={products} renderItem={renderGridItem} numColumns={2} />
     </View>
   );
 };
@@ -132,21 +128,21 @@ const styles = StyleSheet.create({
     color: '#FF5722',
     textAlign: 'center',
   },
-  addToCartButton : {
-   backgroundColor: '#176B87',
-  borderRadius: 50,
-  width: 37,
-  height: 37,
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'absolute',
-  bottom: -5,
-  right: -3,
-  }, 
-  addToCartButtonText : {
+  addToCartButton: {
+    backgroundColor: '#176B87',
+    borderRadius: 50,
+    width: 37,
+    height: 37,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: -5,
+    right: -3,
+  },
+  addToCartButtonText: {
     color: 'white',
     fontSize: 23,
-  }
+  },
 });
 
 export default Grid;

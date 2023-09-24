@@ -1,13 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 
-const Detail = ({ route }) => {
-  const { product } = route.params;
+const Detail = ({route}: any): JSX.Element => {
+  const {product} = route.params;
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: product.image }} style={styles.productImage} />
+        <Image source={{uri: product.image}} style={styles.productImage} />
       </View>
       <View style={styles.productInfo}>
         <Text style={styles.productTitle}>{product.title}</Text>
@@ -23,7 +30,7 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:30,
+    paddingTop: 30,
     backgroundColor: '#fff',
   },
   imageContainer: {

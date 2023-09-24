@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../../features/authSlice';
 import { useNavigation } from '@react-navigation/native';
 
-const Profile = ({ user }) => {
+const Profile = ({ user } :any) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   console.log(user)
@@ -13,7 +13,7 @@ const Profile = ({ user }) => {
   };
 
   const GoOrders = () => {
-    navigation.navigate('orders'); 
+    navigation.navigate('Orders'); 
 
   }
   const GoCart = () => {
