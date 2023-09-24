@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../features/authSlice';
+import { logout } from '../../../features/authSlice';
 import { useNavigation } from '@react-navigation/native';
 
 const Profile = ({ user }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
+  console.log(user)
   const handleSignOut = () => {
     dispatch(logout(null));
   };
@@ -35,7 +35,7 @@ const Profile = ({ user }) => {
           }}
           style={styles.profileImage}
         />
-        <Text style={styles.welcomeText}>Welcome, {user.name}</Text>
+        <Text style={styles.welcomeText}>Welcome, {user}</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Pressable style={styles.button} onPress={GoOrders} >

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React from 'react';
-import { Products } from './Products';
 import Grid from './Grid';
 import { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import HomePage from './HomePage';
 
 export const Home = () => {
   const [toggle, isToggle] = useState(false);
@@ -26,12 +26,12 @@ export const Home = () => {
             name={!toggle ? 'th-large' : 'th-list'}
             size={25}
             onPress={buttonHandler}
-            color="#333" // Customize the icon color
+            color="#333" 
           />
         </View>
       </View>
 
-      {toggle ? <Grid /> : <Products />}
+      {toggle ? <Grid /> : <HomePage />}
     </View>
   );
 };

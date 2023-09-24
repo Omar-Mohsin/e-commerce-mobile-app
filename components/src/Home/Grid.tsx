@@ -9,11 +9,10 @@ import {
   Pressable,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../features/cartSlice';
+import { addItem,SelectAllCart } from '../../../features/cartSlice';
 import { useEffect } from 'react';
-import { fetchProducts } from '../../features/productSlice';
-import { SelectAllProducts } from '../../features/productSlice';
-import { SelectAllCart } from '../../features/cartSlice';
+import { fetchProducts } from '../../../features/productSlice';
+import { SelectAllProducts } from '../../../features/productSlice';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
 import {useNavigation} from '@react-navigation/native';

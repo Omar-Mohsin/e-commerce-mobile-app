@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Cart } from './Cart';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
-import SignIn from './SignIn';
+import SignInPage from './ValidationPage/SignInPage';
+import ProfilePage from './ValidationPage/ProfilePage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
-import Orders from './Orders';
-import HomeStack from './HomeStack';
+import Orders from './OrdersPage/OrderList';
+import HomeStack from './Home/HomeStack';
 export default function App() {
   const user = useSelector(SelectUser);
 
   enableScreens();
 
   const Tab = createBottomTabNavigator();
- 
+
   return (
     <NavigationContainer>
 
@@ -26,8 +26,8 @@ export default function App() {
           component={HomeStack}
           options={{
             title: 'Store',
-            tabBarLabel: 'Home',
-             headerShown: false ,
+            tabBarLabel: 'store',
+            headerShown: false,
 
             tabBarIcon: ({ color, size }) => (
               <Icon name="home" color={color} size={size} />
@@ -49,7 +49,7 @@ export default function App() {
         {!user ? (
           <Tab.Screen
             name="SignIn"
-            component={SignIn}
+            component={SignInPage}
             options={{
               title: 'Sign In',
               tabBarLabel: 'Sign In',
@@ -73,7 +73,7 @@ export default function App() {
             />
             <Tab.Screen
               name="Profile"
-              component={SignIn}
+              component={ProfilePage}
               options={{
                 title: 'Profile',
                 tabBarLabel: 'Profile',
@@ -89,4 +89,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+

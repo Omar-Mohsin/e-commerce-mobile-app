@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     borderRadius: 15,
     backgroundColor: 'red',
-    height: '98.2%',
+    height: '98%',
     width: 100,
     right: 0,
     alignItems: 'center',
