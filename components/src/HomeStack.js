@@ -15,7 +15,7 @@ const HomeStack = () => {
 
       
       />
-      <Stack.Screen name="Detile" component={Detail}
+      <Stack.Screen name="Detail" component={Detail}
       />
     </Stack.Navigator>
   );

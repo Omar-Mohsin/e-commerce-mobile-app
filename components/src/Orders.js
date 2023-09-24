@@ -22,7 +22,7 @@ const Orders = () => {
 
     <View key={index} style={styles.packageContainer}>
       <Text style={styles.packageTitle}>Order {index + 1}</Text>
-      <Text style = {styles.DataText}>{handleDate()}</Text>
+      <Text style = {styles.DateText}>{handleDate()}</Text>
       {packageItems.filter((item,  index) => packageItems.indexOf(item) === index).map((item) => (
         <View key={item.id} style={styles.orderItem}>
           <Image source={{ uri: item.image }} style={styles.image} />
@@ -30,6 +30,7 @@ const Orders = () => {
             <Text style={styles.title}>{item.title}</Text>
             <Text style= {styles.quantityText}>quantity {packageItems.filter((product) => item.id === product.id).length}</Text>
             <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.price}> {item.price}</Text>
             <Text>---------------------------------------------</Text>
           </View>
         
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    height: 100, // Increase image height for better visibility
+    height: 145, // Increase image height for better visibility
     width: 100, // Increase image width for better visibility
     borderRadius: 10,
     marginRight: 15,
@@ -125,7 +126,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
   },
-  DataText: {
+  price : {
+    marginTop : 10,
+    fontSize : 20,
+    color : 'green',
+  } ,
+  DateText: {
     marginBottom: 10,
     color: 'blue',
   },
@@ -135,6 +141,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', // Make price text bold
   },
   quantityText: {
+     fontSize :20 ,
+    fontFamily :'bold',
     marginBottom: 10,
     color: 'green',
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image  ,Pressable} from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/authSlice';
 import { useNavigation } from '@react-navigation/native';
@@ -12,18 +12,18 @@ const Profile = ({ user }) => {
     dispatch(logout(null));
   };
 
-const GoOrders = ()=>{
-  navigation.navigate('orders'); // Navigate to the "Orders" screen
+  const GoOrders = () => {
+    navigation.navigate('orders'); 
 
-}
-const GoCart = ()=>{
-  navigation.navigate('Cart'); // Navigate to the "Orders" screen
+  }
+  const GoCart = () => {
+    navigation.navigate('Cart');
 
-}
-const GoHome = ()=>{
-  navigation.navigate('Home'); // Navigate to the "Orders" screen
+  }
+  const GoHome = () => {
+    navigation.navigate('Home'); 
 
-}
+  }
 
 
   return (
@@ -38,20 +38,20 @@ const GoHome = ()=>{
         <Text style={styles.welcomeText}>Welcome, {user.name}</Text>
       </View>
       <View style={styles.buttonContainer}>
-      <Pressable style ={styles.button} onPress={GoOrders} >
-            <Text style ={styles.ButtonText}>Orders</Text>
-          </Pressable>
-          <Pressable style ={styles.button}  onPress={GoCart}>
-            <Text style ={styles.ButtonText} >Cart</Text>
-          </Pressable>
-          <Pressable style ={styles.button}  onPress={GoHome}>
-            <Text style ={styles.ButtonText}>Home</Text>
-          </Pressable>
+        <Pressable style={styles.button} onPress={GoOrders} >
+          <Text style={styles.ButtonText}>Orders</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={GoCart}>
+          <Text style={styles.ButtonText} >Cart</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={GoHome}>
+          <Text style={styles.ButtonText}>Home</Text>
+        </Pressable>
       </View>
-             <Pressable style ={styles.LogoutButton} onPress={handleSignOut} >
-            <Text style ={styles.ButtonText}>Logout</Text>
-            </Pressable>   
-     </View>
+      <Pressable style={styles.LogoutButton} onPress={handleSignOut} >
+        <Text style={styles.ButtonText}>Logout</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -83,29 +83,29 @@ const styles = StyleSheet.create({
     marginBottom: 30,
 
   },
-  button : {
-    marginTop :10, 
-    marginButton :10, 
-    backgroundColor : '#0077b6',
-    borderRadius : 15,
-    height :40,
-    width : 200,
+  button: {
+    marginTop: 10,
+    marginButton: 10,
+    backgroundColor: '#0077b6',
+    borderRadius: 15,
+    height: 40,
+    width: 200,
     alignItems: 'center',
-  } , 
-  ButtonText : {
-    fontSize  : 20,
-    marginTop : 5,
-    color : 'white'
-  
-  } , 
+  },
+  ButtonText: {
+    fontSize: 20,
+    marginTop: 5,
+    color: 'white'
 
-  LogoutButton : {
-    marginTop :10, 
-    marginButton :10, 
-    backgroundColor : 'red',
-    borderRadius : 15,
-    height :40,
-    width : 200,
-    alignItems:'center',
+  },
+
+  LogoutButton: {
+    marginTop: 10,
+    marginButton: 10,
+    backgroundColor: 'red',
+    borderRadius: 15,
+    height: 40,
+    width: 200,
+    alignItems: 'center',
   }
 });

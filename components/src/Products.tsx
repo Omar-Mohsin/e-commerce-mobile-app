@@ -36,7 +36,7 @@ export const Products = (): JSX.Element => {
   const navigation = useNavigation();
 
   const onProductPress = (item: Product) => {
-    navigation.navigate('Detile', { product: item });
+    navigation.navigate('Detail', { product: item });
   };
 
   const addOnCart = (product: Product) => {
@@ -53,8 +53,8 @@ export const Products = (): JSX.Element => {
         data={products}
         renderItem={({item}) => {
           return (
-            <Pressable onPress={() => onProductPress(item)}>
-              <View key={item.id} style={styles.cardContainer}>
+            <Pressable  key={item.id} onPress={() => onProductPress(item)}>
+              <View style={styles.cardContainer}>
                 <Image source={{uri: item.image}} style={styles.cardImage} />
                 {cart.filter((product: Product) => item.id === product.id)
                   .length > 0 && (
@@ -88,7 +88,6 @@ export const Products = (): JSX.Element => {
             </Pressable>
           );
         }}
-        keyExtractor={item => item.id.toString()}
       />
     </View>
   );

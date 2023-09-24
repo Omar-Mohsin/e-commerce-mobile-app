@@ -9,7 +9,6 @@ const Detail = ({ route }) => {
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.image }} style={styles.productImage} />
       </View>
-
       <View style={styles.productInfo}>
         <Text style={styles.productTitle}>{product.title}</Text>
         <Text style={styles.productDescription}>{product.description}</Text>
@@ -24,6 +23,7 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop:30,
     backgroundColor: '#fff',
   },
   imageContainer: {

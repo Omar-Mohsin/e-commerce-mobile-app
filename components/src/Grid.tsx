@@ -6,6 +6,7 @@ import {
   FlatList,
   Image, 
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../features/cartSlice';
@@ -15,6 +16,7 @@ import { SelectAllProducts } from '../../features/productSlice';
 import { SelectAllCart } from '../../features/cartSlice';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from '@reduxjs/toolkit';
+import {useNavigation} from '@react-navigation/native';
 
 export const Grid = (): JSX.Element => {
   interface Product {
@@ -25,8 +27,9 @@ export const Grid = (): JSX.Element => {
   }
 
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch(); // Correct type for dispatch
-  const cards = useSelector(SelectAllProducts);
+  const products = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
+  const navigation = useNavigation();
 
   const addOnCart = (card: Product) => {
     dispatch(addItem(card));
@@ -38,10 +41,11 @@ export const Grid = (): JSX.Element => {
 
   const renderGridItem = ({ item }: { item: Product }) => {
     return (
-      <TouchableOpacity
+      <Pressable
         style={styles.gridItem}
         onPress={() => {
-          addOnCart(item);
+          navigation.navigate('Detail', { product: item });
+
         }}
       >
         <View style={styles.gridImageContainer}>
@@ -58,16 +62,19 @@ export const Grid = (): JSX.Element => {
           {item.title}
         </Text>
         <Text style={styles.gridPrice}>${item.price}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style ={styles.addToCartButton} onPress={()=>addOnCart(item)}>
+          <Text style ={styles.addToCartButtonText}>+</Text>
+        </TouchableOpacity>
+      </Pressable>
     );
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={cards}
+        data={products}
         renderItem={renderGridItem}
-        numColumns={2} // Set the number of columns for the grid
+        numColumns={2} 
       />
     </View>
   );
@@ -126,6 +133,21 @@ const styles = StyleSheet.create({
     color: '#FF5722',
     textAlign: 'center',
   },
+  addToCartButton : {
+   backgroundColor: '#176B87',
+  borderRadius: 50,
+  width: 37,
+  height: 37,
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'absolute',
+  bottom: -5,
+  right: -3,
+  }, 
+  addToCartButtonText : {
+    color: 'white',
+    fontSize: 23,
+  }
 });
 
 export default Grid;
