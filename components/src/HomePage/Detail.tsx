@@ -30,8 +30,8 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#fff',
+    paddingTop: 15,
+    backgroundColor: 'white',
   },
   imageContainer: {
     justifyContent: 'center',

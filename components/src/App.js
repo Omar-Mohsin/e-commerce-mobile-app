@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Cart } from './Cart';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { enableScreens } from 'react-native-screens';
@@ -9,7 +8,8 @@ import ProfilePage from './ValidationPage/ProfilePage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SelectUser } from '../../features/authSlice';
 import Orders from './OrdersPage/OrderList';
-import HomeStack from './Home/HomeStack';
+import HomeStack from './HomePage/HomeStack';
+import Cart from './CartPage/Cart';
 export default function App() {
   const user = useSelector(SelectUser);
 
