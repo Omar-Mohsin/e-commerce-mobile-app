@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from '@reduxjs/toolkit';
 import {AnyAction} from '@reduxjs/toolkit';
 import {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation,NavigationProp} from '@react-navigation/native';
 import {fetchProducts} from '../../../features/productSlice';
 import {SelectAllProducts} from '../../../features/productSlice';
 interface Product {
@@ -27,7 +27,7 @@ const Product = (): JSX.Element => {
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch();
   const products = useSelector(SelectAllProducts);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation <NavigationProp<any>>();
 
   const onProductPress = (item: Product) => {
     navigation.navigate('Detail', {product: item});

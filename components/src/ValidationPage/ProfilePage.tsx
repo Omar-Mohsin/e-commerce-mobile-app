@@ -1,30 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Pressable } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../../features/authSlice';
-import { useNavigation } from '@react-navigation/native';
+import {StyleSheet, Text, View, Button, Image, Pressable} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../../features/authSlice';
+import {useNavigation , NavigationProp} from '@react-navigation/native';
 
-const Profile = ({ user } :any) => {
-  const navigation = useNavigation();
+
+interface ProfileProps {
+  user: string;
+}
+const Profile = ({user}: ProfileProps): JSX.Element => {
+  const navigation = useNavigation <NavigationProp<any>>();
   const dispatch = useDispatch();
-  console.log(user)
+  console.log(user);
   const handleSignOut = () => {
     dispatch(logout(null));
   };
 
   const GoOrders = () => {
-    navigation.navigate('Orders'); 
-
-  }
+    navigation.navigate('Orders');
+  };
   const GoCart = () => {
     navigation.navigate('Cart');
-
-  }
+  };
   const GoHome = () => {
-    navigation.navigate('Home'); 
-
-  }
-
+    navigation.navigate('Home');
+  };
 
   return (
     <View style={styles.container}>
@@ -38,17 +38,17 @@ const Profile = ({ user } :any) => {
         <Text style={styles.welcomeText}>Welcome, {user}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={GoOrders} >
+        <Pressable style={styles.button} onPress={GoOrders}>
           <Text style={styles.ButtonText}>Orders</Text>
         </Pressable>
         <Pressable style={styles.button} onPress={GoCart}>
-          <Text style={styles.ButtonText} >Cart</Text>
+          <Text style={styles.ButtonText}>Cart</Text>
         </Pressable>
         <Pressable style={styles.button} onPress={GoHome}>
           <Text style={styles.ButtonText}>Home</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.LogoutButton} onPress={handleSignOut} >
+      <Pressable style={styles.LogoutButton} onPress={handleSignOut}>
         <Text style={styles.ButtonText}>Logout</Text>
       </Pressable>
     </View>
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 30,
     marginBottom: 30,
-
   },
   button: {
     marginTop: 10,
@@ -95,8 +94,7 @@ const styles = StyleSheet.create({
   ButtonText: {
     fontSize: 20,
     marginTop: 5,
-    color: 'white'
-
+    color: 'white',
   },
 
   LogoutButton: {
@@ -107,5 +105,5 @@ const styles = StyleSheet.create({
     height: 40,
     width: 200,
     alignItems: 'center',
-  }
+  },
 });

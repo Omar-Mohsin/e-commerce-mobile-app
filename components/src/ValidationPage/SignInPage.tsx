@@ -22,7 +22,7 @@ const SignInPage = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer} behavior="position">
+      <View style={styles.formContainer} >
         <Text style={styles.title}>Welcome Back!</Text>
         <TextInput
           style={styles.input}

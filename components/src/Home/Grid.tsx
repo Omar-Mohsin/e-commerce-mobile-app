@@ -15,7 +15,7 @@ import {fetchProducts} from '../../../features/productSlice';
 import {SelectAllProducts} from '../../../features/productSlice';
 import {ThunkDispatch} from '@reduxjs/toolkit';
 import {AnyAction} from '@reduxjs/toolkit';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
 
 export const Grid = (): JSX.Element => {
   interface Product {
@@ -28,7 +28,7 @@ export const Grid = (): JSX.Element => {
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch(); // Correct type for dispatch
   const products = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<any>>();
 
   const addOnCart = (product: Product) => {
     dispatch(addItem(product));

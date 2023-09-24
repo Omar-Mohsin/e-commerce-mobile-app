@@ -1,49 +1,60 @@
-import { StyleSheet, Text, View , Image } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View, Image} from 'react-native';
+import React from 'react';
 
 interface Product {
   id: number;
   title: string;
   price: number;
   image: string;
-  description : string;
+  description: string;
 }
-const Order = ({packege , index} : any) => {
-  const handleDate = ()=>{
-
+const Order = ({packege, index}: any): JSX.Element => {
+  const handleDate = () => {
     const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleString(); // Format the date and time
+    const formattedDate = currentDate.toLocaleString(); // Format the date and time
 
-  return formattedDate;
-  }
+    return formattedDate;
+  };
   return (
-    
-
     <View key={index} style={styles.packageContainer}>
       <Text style={styles.packageTitle}>Order {index + 1}</Text>
-      <Text style = {styles.DateText}>{handleDate()}</Text>
-      {packege.filter((item : Product,  index :number) => packege.indexOf(item) === index).map((item : Product) => (
-        <View key={item.id} style={styles.orderItem}>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <View style={styles.productInfo}>
-            <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">{item.title}</Text>
-            <Text style= {styles.quantityText}>quantity {packege.filter((product : Product) => item.id === product.id).length}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-            <Text style={styles.price}>${item.price}</Text>
-            <Text>---------------------------------------------</Text>
+      <Text style={styles.DateText}>{handleDate()}</Text>
+      {packege
+        .filter(
+          (item: Product, index: number) => packege.indexOf(item) === index,
+        )
+        .map((item: Product) => (
+          <View key={item.id} style={styles.orderItem}>
+            <Image source={{uri: item.image}} style={styles.image} />
+            <View style={styles.productInfo}>
+              <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+                {item.title}
+              </Text>
+              <Text style={styles.quantityText}>
+                quantity{' '}
+                {
+                  packege.filter((product: Product) => item.id === product.id)
+                    .length
+                }
+              </Text>
+              <Text style={styles.description}>{item.description}</Text>
+              <Text style={styles.price}>${item.price}</Text>
+              <Text>---------------------------------------------</Text>
+            </View>
           </View>
-        
-        </View>
-      ))}
-        <Text style = {styles.PriceText}> Total Price  {packege.reduce((acc :number, item : Product) => acc + item.price, 0)}</Text>
+        ))}
+      <Text style={styles.PriceText}>
+        {' '}
+        Total Price{' '}
+        {packege.reduce((acc: number, item: Product) => acc + item.price, 0)}
+      </Text>
     </View>
-  )
-}
+  );
+};
 
-export default Order
+export default Order;
 
 const styles = StyleSheet.create({
-
   packageContainer: {
     marginBottom: 20,
     borderWidth: 1,
@@ -53,11 +64,11 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
   },
   packageTitle: {
-    fontSize: 24, 
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#333',
@@ -69,7 +80,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 170,
-    width: 100, 
+    width: 100,
     borderRadius: 10,
     marginRight: 30,
   },
@@ -86,11 +97,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
   },
-  price : {
-    marginTop : 10,
-    fontSize : 20,
-    color : 'green',
-  } ,
+  price: {
+    marginTop: 10,
+    fontSize: 20,
+    color: 'green',
+  },
   DateText: {
     marginBottom: 10,
     color: 'blue',
@@ -98,14 +109,12 @@ const styles = StyleSheet.create({
   PriceText: {
     fontSize: 22,
     color: 'lime',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
   quantityText: {
-     fontSize :17 ,
-    fontFamily :'bold',
+    fontSize: 17,
+    fontFamily: 'bold',
     marginBottom: 10,
     color: 'green',
   },
-
-
-})
+});
