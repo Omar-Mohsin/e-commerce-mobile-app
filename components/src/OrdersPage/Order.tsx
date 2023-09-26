@@ -39,7 +39,7 @@ const Order = ({packege, index}: any): JSX.Element => {
               </Text>
               <Text style={styles.description}>{item.description}</Text>
               <Text style={styles.price}>${item.price}</Text>
-              <Text>---------------------------------------------</Text>
+              <Text>---------------------------------</Text>
             </View>
           </View>
         ))}
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    height: 170,
-    width: 120,
+    height: 175,
+    width: 130,
     borderRadius: 10,
     marginRight: 30,
   },
