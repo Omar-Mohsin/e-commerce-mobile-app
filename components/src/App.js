@@ -6,7 +6,7 @@ import { enableScreens } from 'react-native-screens';
 import SignInPage from './ValidationPage/SignInPage';
 import ProfilePage from './ValidationPage/ProfilePage';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { SelectUser } from '../../features/authSlice';
+import { SelectUser } from '../../features/auth/authSlice';
 import Orders from './OrdersPage/OrderList';
 import HomeStack from './HomePage/HomeStack';
 import Cart from './CartPage/Cart';

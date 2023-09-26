@@ -8,7 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, SelectUser} from '../../../features/authSlice';
+import {login, SelectUser} from '../../../features/auth/authSlice';
 
 import Profile from './ProfilePage';
 import SignInPage from './SignInPage';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, Image, Pressable} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {logout} from '../../../features/authSlice';
+import {logout} from '../../../features/auth/authSlice';
 import {useNavigation , NavigationProp} from '@react-navigation/native';
 
 

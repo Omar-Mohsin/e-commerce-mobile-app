@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View,Image ,TouchableOpacity,Pressable} from 'react-native'
 import React from 'react'
-import { SelectAllCart } from '../../../features/cartSlice';
+import { SelectAllCart } from '../../../features/cart/cartSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-import { addToCart } from '../../../features/authSlice';
-import { removeItem , addItem } from '../../../features/cartSlice';
+import { addToCart } from '../../../features/auth/authSlice';
+import { removeItem , addItem } from '../../../features/cart/cartSlice';
 
 
 interface Product {

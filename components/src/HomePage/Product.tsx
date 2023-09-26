@@ -8,14 +8,14 @@ import {
   FlatList,
 } from 'react-native';
 import React from 'react';
-import {SelectAllCart, addItem} from '../../../features/cartSlice';
+import {SelectAllCart, addItem} from '../../../features/cart/cartSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from '@reduxjs/toolkit';
 import {AnyAction} from '@reduxjs/toolkit';
 import {useEffect} from 'react';
 import {useNavigation,NavigationProp} from '@react-navigation/native';
-import {fetchProducts} from '../../../features/productSlice';
-import {SelectAllProducts} from '../../../features/productSlice';
+import {fetchProducts} from '../../../features/product/productSlice';
+import {SelectAllProducts} from '../../../features/product/productSlice';
 interface Product {
   id: number;
   title: string;

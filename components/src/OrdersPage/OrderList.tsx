@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import {SelectUser} from '../../../features/authSlice';
+import {SelectUser} from '../../../features/auth/authSlice';
 import Order from './Order';
 
 interface Product {

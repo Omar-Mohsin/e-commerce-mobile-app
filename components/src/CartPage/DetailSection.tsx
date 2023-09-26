@@ -2,10 +2,10 @@ import {StyleSheet, Text, View, Pressable} from 'react-native';
 import React from 'react';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addToCart} from '../../../features/authSlice';
-import {clearCart} from '../../../features/cartSlice';
-import {SelectAllCart} from '../../../features/cartSlice';
-import {SelectUser} from '../../../features/authSlice';
+import {addToCart} from '../../../features/auth/authSlice';
+import {clearCart} from '../../../features/cart/cartSlice';
+import {SelectAllCart} from '../../../features/cart/cartSlice';
+import {SelectUser} from '../../../features/auth/authSlice';
 
 interface Product {
   id: number;
@@ -29,45 +29,39 @@ const DetailSection = () => {
     navigation.navigate('Orders'); // Navigate to the "Orders" screen
     dispatch(clearCart(carts));
   };
-
-  const calculateTotalPrice = (): number => {
-    const subPrice = carts
-      .reduce((acc: number, card: Product) => {
-        const cardCount = carts.filter(
-          (item: Product) => item.id === card.id,
-        ).length;
-        return acc + card.price * cardCount;
-      }, 0)
-      .toFixed(2);
-    return subPrice;
-  };
-
-  const calculateTax = (): number => {
-    const taxRate: number = 0.05;
-    const subtotal: number = calculateTotalPrice();
-    const tax: number = Math.round(subtotal * taxRate);
-    return tax;
-  };
-
-  const calculateGrandTotal = (): number => {
-    const totalTax: number = calculateTax();
-    const totalSubtotal: number = calculateTotalPrice();
-    const grandTotal: number = totalSubtotal + totalTax;
-    return grandTotal;
-  };
   const filteredCarts = carts.filter(
     (item: Product, index: number) => carts.indexOf(item) === index,
   );
+
+  const calculateSubtotal = () => {
+    // Calculate the subtotal by summing the prices of items in the cart
+    return carts.reduce(
+      (subtotal : number, item  :Product) => subtotal + item.price,
+      0
+    );
+  };
+  
+  const calculateTax = () => {
+    // Calculate the tax as 5% of the subtotal
+    return calculateSubtotal() * 0.05;
+  };
+  
+  const calculateGrandTotal = () => {
+    // Calculate the grand total by adding the subtotal and tax
+    return calculateSubtotal() + calculateTax();
+  };
+
+
   return (
     <View>
       {filteredCarts.length > 0 && (
         <View style={styles.summaryContainer}>
-          <Text style={styles.summaryText}>Subtotal: </Text>
+          <Text style={styles.summaryText}>Subtotal: ${calculateSubtotal().toFixed(2)} </Text>
           <Text style={styles.summaryText}>
             Tax (5%): ${calculateTax().toFixed(2)}
           </Text>
           <Text style={styles.grandTotal}>
-            Grand Total: ${calculateGrandTotal()}
+            Grand Total: ${calculateGrandTotal().toFixed(2)}
           </Text>
 
           {user ? (
