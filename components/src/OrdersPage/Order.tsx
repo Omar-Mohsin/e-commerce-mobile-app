@@ -1,13 +1,7 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import { Product } from '../Types/Types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-}
 const Order = ({packege, index}: any): JSX.Element => {
   const handleDate = () => {
     const currentDate = new Date();
@@ -44,8 +38,7 @@ const Order = ({packege, index}: any): JSX.Element => {
           </View>
         ))}
       <Text style={styles.PriceText}>
-        {' '}
-        Total Price{' '}
+        Total Price :  $
         {packege.reduce((acc: number, item: Product) => acc + item.price, 0)}
       </Text>
     </View>

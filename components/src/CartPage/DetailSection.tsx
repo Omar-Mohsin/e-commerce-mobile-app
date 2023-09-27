@@ -6,57 +6,48 @@ import {addToCart} from '../../../features/auth/authSlice';
 import {clearCart} from '../../../features/cart/cartSlice';
 import {SelectAllCart} from '../../../features/cart/cartSlice';
 import {SelectUser} from '../../../features/auth/authSlice';
-
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-}
+import {Product} from '../Types/Types';
 const DetailSection = () => {
-  const carts = useSelector(SelectAllCart);
+  const cart = useSelector(SelectAllCart);
   const user = useSelector(SelectUser);
   const navigation = useNavigation<NavigationProp<any>>();
 
   const dispatch = useDispatch();
 
   const SignInHandler = () => {
-    navigation.navigate('SignIn'); // Navigate to the "Orders" screen
+    navigation.navigate('SignIn');
   };
   const CheckoutHandler = () => {
-    dispatch(addToCart(carts));
-    navigation.navigate('Orders'); // Navigate to the "Orders" screen
-    dispatch(clearCart(carts));
+    dispatch(addToCart(cart));
+    navigation.navigate('Orders');
+    dispatch(clearCart(cart));
   };
-  const filteredCarts = carts.filter(
-    (item: Product, index: number) => carts.indexOf(item) === index,
+  const filteredCarts = cart.filter(
+    (item: Product, index: number) => cart.indexOf(item) === index,
   );
 
   const calculateSubtotal = () => {
-    // Calculate the subtotal by summing the prices of items in the cart
-    return carts.reduce(
-      (subtotal : number, item  :Product) => subtotal + item.price,
-      0
+    return cart.reduce(
+      (subtotal: number, item: Product) => subtotal + item.price,
+      0,
     );
   };
-  
+
   const calculateTax = () => {
-    // Calculate the tax as 5% of the subtotal
     return calculateSubtotal() * 0.05;
   };
-  
+
   const calculateGrandTotal = () => {
-    // Calculate the grand total by adding the subtotal and tax
     return calculateSubtotal() + calculateTax();
   };
-
 
   return (
     <View>
       {filteredCarts.length > 0 && (
         <View style={styles.summaryContainer}>
-          <Text style={styles.summaryText}>Subtotal: ${calculateSubtotal().toFixed(2)} </Text>
+          <Text style={styles.summaryText}>
+            Subtotal: ${calculateSubtotal().toFixed(2)}{' '}
+          </Text>
           <Text style={styles.summaryText}>
             Tax (5%): ${calculateTax().toFixed(2)}
           </Text>

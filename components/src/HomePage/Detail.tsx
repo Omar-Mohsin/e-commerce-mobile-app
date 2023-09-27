@@ -17,15 +17,18 @@ const Detail = ({route}: any): JSX.Element => {
     'https://images.pexels.com/photos/4066292/pexels-photo-4066292.jpeg?auto=compress&cs=tinysrgb&w=400',
   ];
 
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
-          <ScrollView horizontal pagingEnabled>
+        <ScrollView horizontal pagingEnabled>
           {images.map((image: any, index: number) => (
-            <Image key={index} source={{ uri: image }} style={styles.productImage} />
+            <Image
+              key={index}
+              source={{uri: image}}
+              style={styles.productImage}
+            />
           ))}
-          </ScrollView>
+        </ScrollView>
       </View>
       <View style={styles.productInfo}>
         <Text style={styles.productTitle}>{product.title}</Text>

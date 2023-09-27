@@ -16,39 +16,34 @@ import {useEffect} from 'react';
 import {useNavigation,NavigationProp} from '@react-navigation/native';
 import {fetchProducts} from '../../../features/product/productSlice';
 import {SelectAllProducts} from '../../../features/product/productSlice';
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-}
-
-const Product = (): JSX.Element => {
+import { Product } from '../Types/Types';
+const Item = (): JSX.Element => {
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch();
   const products = useSelector(SelectAllProducts);
 
   const navigation = useNavigation <NavigationProp<any>>();
 
-  const onProductPress = (item: Product) => {
+  const showDetailPage = (item: Product) => {
     navigation.navigate('Detail', {product: item});
   };
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch]);
+  }, []);
 
   const cart = useSelector(SelectAllCart);
 
-  const addOnCart = (product: Product) => {
+  const addToCart = (product: Product) => {
     dispatch(addItem(product));
   };
 
+  
   return (
     <FlatList
       data={products}
       renderItem={({item}) => {
         return (
-          <Pressable key={item.id} onPress={() => onProductPress(item)}>
+          <Pressable key={item.id} onPress={() => showDetailPage(item)}>
             <View style={styles.cardContainer}>
               <Image source={{uri: item.image}} style={styles.cardImage} />
               {cart.filter((product: Product) => item.id === product.id)
@@ -70,7 +65,7 @@ const Product = (): JSX.Element => {
                 <TouchableOpacity
                   style={styles.addToCartButton}
                   onPress={() => {
-                    addOnCart(item);
+                    addToCart(item);
                   }}>
                   <Text style={styles.addToCartButtonText}>Add to Cart</Text>
                 </TouchableOpacity>
@@ -83,7 +78,7 @@ const Product = (): JSX.Element => {
   );
 };
 
-export default Product;
+export default Item;
 
 const styles = StyleSheet.create({
   cardContainer: {

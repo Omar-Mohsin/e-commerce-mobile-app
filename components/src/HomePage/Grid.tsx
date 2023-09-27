@@ -16,27 +16,21 @@ import {SelectAllProducts} from '../../../features/product/productSlice';
 import {ThunkDispatch} from '@reduxjs/toolkit';
 import {AnyAction} from '@reduxjs/toolkit';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
-
+import { Product } from '../Types/Types';
 export const Grid = (): JSX.Element => {
-  interface Product {
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-  }
 
   const dispatch: ThunkDispatch<{}, {}, AnyAction> = useDispatch(); // Correct type for dispatch
   const products = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const addOnCart = (product: Product) => {
+  const addToCart = (product: Product) => {
     dispatch(addItem(product));
   };
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch]);
+  }, []);
 
   const renderGridItem = ({item}: {item: Product}) => {
     return (
@@ -61,7 +55,7 @@ export const Grid = (): JSX.Element => {
         <Text style={styles.gridPrice}>${item.price}</Text>
         <TouchableOpacity
           style={styles.addToCartButton}
-          onPress={() => addOnCart(item)}>
+          onPress={() => addToCart(item)}>
           <Text style={styles.addToCartButtonText}>+</Text>
         </TouchableOpacity>
       </Pressable>

@@ -3,21 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
-  Image,
+ 
   ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {SelectUser} from '../../../features/auth/authSlice';
 import Order from './Order';
+import { Product } from '../Types/Types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-}
 
 const OrderList = (): JSX.Element => {
   const {cart} = useSelector(SelectUser);
